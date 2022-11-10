@@ -1,9 +1,14 @@
 import React from 'react';
 function TextBox() {
     return (
-        <input
-            type="text"
-            className="from-control" />
+        <div className="">
+            <label type="text" id="">
+                
+
+            </label>
+
+        </div>
+
 
     )
 }
