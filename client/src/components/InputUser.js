@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 // import TextBox from "./TextBox"
 const InputUser = () => {
     // const [id, setId] = useState();  // It declares a “state variable”  || 
@@ -14,14 +14,14 @@ const InputUser = () => {
     // const [phoneNumber, setPhoneNumber] = useState("");
     // console.log(phoneNumber)
     const [user, setUser] = useState({
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
+        first_name: "",
+        last_name: "",
+        phone_number: "",
         id: "",
         email: ""
     });
 
-    const { firstName, lastName,email, phoneNumber, id  } = user;
+    const { first_name, last_name, email, phone_number, id } = user;
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -53,8 +53,8 @@ const InputUser = () => {
                                 type="text"
                                 className="form-control form-control-lg"
                                 placeholder="Enter first name"
-                                name="firstName"
-                                value={firstName}
+                                name="first_name"
+                                value={first_name}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
@@ -63,8 +63,8 @@ const InputUser = () => {
                                 type="text"
                                 className="form-control form-control-lg"
                                 placeholder="Enter last name"
-                                name="lastName"
-                                value={lastName}
+                                name="last_name"
+                                value={last_name}
                                 onChange={e => onInputChange(e)}
                             />
                             <input
@@ -81,8 +81,8 @@ const InputUser = () => {
                                 type="text"
                                 className="form-control form-control-lg"
                                 placeholder="Enter phone number"
-                                name="phoneNumber"
-                                value={phoneNumber}
+                                name="phone_number"
+                                value={phone_number}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
@@ -107,8 +107,4 @@ const InputUser = () => {
     );
 };
 
-{/* <div className="lastname">
-<label className="form__label" for="lastName">Last Name </label>
-<input  type="text" name="" id="lastName" value={lastName}  className="form__input" onChange = {(e) => handleInputChange(e)} placeholder="LastName"/>
-</div> */}
 export default InputUser;  

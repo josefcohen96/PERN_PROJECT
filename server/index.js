@@ -13,11 +13,15 @@ app.use(express.json());
 // create a TODO
 app.post("/todos", async (req, res) => {
     try {
-        const { id } = req.body;
-        const { email } = req.body;
         const { first_name } = req.body;
-        const newTodo = await pool.query("INSERT INTO users (id, email, first_name) VALUES($1,$2,$3) RETURNING *",
-            [id, email, first_name]);
+        const { last_name } = req.body;
+        const { email } = req.body;
+        const { phone_number} = req.body;
+        const { id } = req.body;
+
+
+        const newTodo = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number, id) VALUES($1,$2,$3,$4,$5) RETURNING *",
+            [first_name, last_name, email, phone_number,id ]);
         res.json(newTodo.rows[0]);
     } catch (err) {
         console.error(err.message);
