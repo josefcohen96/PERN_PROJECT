@@ -10,54 +10,57 @@ app.use(express.json());
 
 //ROUTES//
 
-// create a TODO
-app.post("/todos", async (req, res) => {
+// create a USER
+app.post("/users", async (req, res) => {
     try {
         const { first_name } = req.body;
         const { last_name } = req.body;
         const { email } = req.body;
         const { phone_number} = req.body;
+        const { permission } = req.body;
+        const { work_area } = req.body;
+        const { speciality_product } = req.body;
         const { id } = req.body;
 
-
-        const newTodo = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number, id) VALUES($1,$2,$3,$4,$5) RETURNING *",
-            [first_name, last_name, email, phone_number,id ]);
-        res.json(newTodo.rows[0]);
+        
+        const newUser = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number, id, permission, work_area, speciality_product) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *",
+            [first_name, last_name, email, phone_number,id, permission, work_area, speciality_product ]);
+        res.json(newUser.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
 })
-//GETS ALL TODOS 
+//GETS ALL USERS 
 
-app.get("/todos", async (req, res) => {
+app.get("/users", async (req, res) => {
     try {
-        const allTodos = await pool.query("SELECT * FROM users");
-        res.json(allTodos.rows);
+        const allUsers = await pool.query("SELECT * FROM users");
+        res.json(allUsers.rows);
     } catch (err) {
         console.error(err.message);
     }
 })
 
-//GET A TODO 
+//GET A USER 
 
-app.get("/todos/:id", async (req, res) => { // looking for specific id 
+app.get("/users/:id", async (req, res) => { // looking for specific id 
     try {
         console.log(req.params);
         const { id } = req.params; // save the id 
-        const todo = await pool.query("SELECT * FROM users  WHERE  id=$1", [id]) // search for the id in the specific table 
+        const user = await pool.query("SELECT * FROM users  WHERE  id=$1", [id]) // search for the id in the specific table 
 
-        res.json(todo.rows[0]) // print the first row in the table 
+        res.json(user.rows[0]) // print the first row in the table 
     } catch (err) {
         console.error(err.message);
     }
 })
-//UPDATE TODO
+//UPDATE USER
 
-app.put("/todos/:id", async (req, res) => {
+app.put("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const { phone_number } = req.body;
-        const updateTodo = await pool.query(
+        const updateUser = await pool.query(
             "UPDATE users SET phone_number = $1 WHERE id = $2",
             [phone_number, id]
         );
@@ -69,11 +72,11 @@ app.put("/todos/:id", async (req, res) => {
     }
 })
 
-// DELETE TODO
-app.delete("/todos/:id", async (req, res) => {
+// DELETE USER
+app.delete("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const deleteTodo = await pool.query("DELETE FROM users WHERE id= $1", [id]);
+        const deleteUser = await pool.query("DELETE FROM users WHERE id= $1", [id]);
 
     } catch (err) {
         console.error(err.message)

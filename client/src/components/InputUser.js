@@ -1,27 +1,19 @@
 import React, { useState } from "react";
 // import TextBox from "./TextBox"
 const InputUser = () => {
-    // const [id, setId] = useState();  // It declares a “state variable”  || 
-    // console.log(id)
-    //The only argument to the useState() Hook is the initial state 
-    //|| return  the current state and a function that updates it
-    // const [email, setEmail] = useState("");
-    // console.log(email)
-    // const [firstName, setFirstName] = useState("");
-    // console.log(firstName)
-    // const [lastName, setLastName] = useState("");
-    // console.log(lastName)
-    // const [phoneNumber, setPhoneNumber] = useState("");
-    // console.log(phoneNumber)
+
     const [user, setUser] = useState({
         first_name: "",
         last_name: "",
         phone_number: "",
         id: "",
-        email: ""
+        email: "",
+        permission: "",
+        work_area: "",
+        speciality_product: ""
     });
 
-    const { first_name, last_name, email, phone_number, id } = user;
+    const { first_name, last_name, email, phone_number, id, permission, work_area, speciality_product } = user;
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -29,7 +21,7 @@ const InputUser = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/todos", {
+            const response = await fetch("http://localhost:5000/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
@@ -67,6 +59,8 @@ const InputUser = () => {
                                 value={last_name}
                                 onChange={e => onInputChange(e)}
                             />
+                        </div>
+                        <div className="form-group">
                             <input
                                 type="text"
                                 className="form-control form-control-lg"
@@ -97,7 +91,37 @@ const InputUser = () => {
                             />
                         </div>
                         <div className="form-group">
+                            <input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Enter permission"
+                                name="permission"
+                                value={permission}
+                                onChange={e => onInputChange(e)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Enter work_area"
+                                name="work_area"
+                                value={work_area}
+                                onChange={e => onInputChange(e)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Enter speciality_product"
+                                name="speciality_product"
+                                value={speciality_product}
+                                onChange={e => onInputChange(e)}
+                            />
+                        </div>
 
+                        <div className="form-group">
                         </div>
                         <button className="btn btn-secondary btn-block">Update User</button>
                     </form>
