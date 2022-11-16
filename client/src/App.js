@@ -4,7 +4,10 @@ import "./App.css";
 
 //components
 
+import HomePage from './components/HomePage';
 import InputUser from './components/InputUser';
+
+
 
 
 function App() {

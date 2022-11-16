@@ -11,7 +11,7 @@ app.use(express.json());
 //ROUTES//
 
 // create a USER
-app.post("/users", async (req, res) => {
+app.post("/addUser", async (req, res) => {
     try {
         const { first_name } = req.body;
         const { last_name } = req.body;
@@ -29,6 +29,11 @@ app.post("/users", async (req, res) => {
     } catch (err) {
         console.error(err.message);
     }
+})
+//GETS HOMEPAGE
+
+app.get("/HomePage",async (req,res) => {
+    console.log("HEY")
 })
 //GETS ALL USERS 
 

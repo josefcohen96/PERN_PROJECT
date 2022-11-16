@@ -21,7 +21,7 @@ const InputUser = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/users", {
+            const response = await fetch("http://localhost:5000/addUser", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
@@ -38,7 +38,7 @@ const InputUser = () => {
         <div className="container">
             <div className="row">
                 <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
-                    <h2 className="text-center mb-4">Edit A Product</h2>
+                    <h2 className="text-center mb-4">Add User</h2>
                     <form onSubmit={e => onSubmit(e)}>
                         <div className="form-group">
                             <input
@@ -123,7 +123,7 @@ const InputUser = () => {
 
                         <div className="form-group">
                         </div>
-                        <button className="btn btn-secondary btn-block">Update User</button>
+                        <button className="btn btn-secondary btn-block">Create User</button>
                     </form>
                 </div>
             </div>
