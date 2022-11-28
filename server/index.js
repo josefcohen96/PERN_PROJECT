@@ -11,7 +11,7 @@ app.use(express.json());
 //ROUTES//
 
 // create a USER
-app.post("/addUser", async (req, res) => {
+app.post("/InputUser", async (req, res) => {
     try {
         const { first_name } = req.body;
         const { last_name } = req.body;
@@ -32,7 +32,7 @@ app.post("/addUser", async (req, res) => {
 })
 //GETS HOMEPAGE
 
-app.get("/HomePage",async (req,res) => {
+app.get("/",async (req,res) => {
     console.log("HEY")
 })
 //GETS ALL USERS 
@@ -90,7 +90,6 @@ app.delete("/users/:id", async (req, res) => {
 })
 app.listen(5000, () => {
     try {
-
         console.log("server has started on port 5000");
     } catch (err) {
         console.error(err.message);
