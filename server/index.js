@@ -16,15 +16,15 @@ app.post("/InputUser", async (req, res) => {
         const { first_name } = req.body;
         const { last_name } = req.body;
         const { email } = req.body;
-        const { phone_number} = req.body;
+        const { phone_number } = req.body;
         const { permission } = req.body;
         const { work_area } = req.body;
         const { speciality_product } = req.body;
         const { id } = req.body;
 
-        
+
         const newUser = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number, id, permission, work_area, speciality_product) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *",
-            [first_name, last_name, email, phone_number,id, permission, work_area, speciality_product ]);
+            [first_name, last_name, email, phone_number, id, permission, work_area, speciality_product]);
         res.json(newUser.rows[0]);
     } catch (err) {
         console.error(err.message);
@@ -32,7 +32,7 @@ app.post("/InputUser", async (req, res) => {
 })
 //GETS HOMEPAGE
 
-app.get("/",async (req,res) => {
+app.get("/", async (req, res) => {
     console.log("HEY")
 })
 //GETS ALL USERS 
@@ -61,7 +61,7 @@ app.get("/users/:id", async (req, res) => { // looking for specific id
 })
 //UPDATE USER
 
-app.put("/users/:id", async (req, res) => {
+app.put("/EditUser/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const { phone_number } = req.body;
@@ -82,7 +82,7 @@ app.delete("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const deleteUser = await pool.query("DELETE FROM users WHERE id= $1", [id]);
-
+        res.json("user was deleted")
     } catch (err) {
         console.error(err.message)
     }

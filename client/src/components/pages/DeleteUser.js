@@ -2,12 +2,8 @@ import React, { useState } from "react";
 // import TextBox from "./TextBox"
 const DeleteUser = () => {
 
-    const [user, setUser] = useState({
-        first_name: "",
-        last_name: "",
-    });
+    const [user, setUser] = useState({ id: "" });
 
-    const { first_name, last_name} = user;
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -15,8 +11,8 @@ const DeleteUser = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/InputUser", {
-                method: "POST",
+            const response = await fetch(`http://localhost:5000/${user.idid}`, {
+                method: "DELETE ",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
 
@@ -38,22 +34,12 @@ const DeleteUser = () => {
                             <input
                                 type="text"
                                 className="form-control form-control-lg"
-                                placeholder="first name"
-                                name="first_name"
-                                value={first_name}
+                                placeholder="id"
+                                name="id"
+                                value={id}
                                 onChange={e => onInputChange(e)}
                             />
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="last name"
-                                name="last_name"
-                                value={last_name}
-                                onChange={e => onInputChange(e)}
-                            />
-                            
                         </div>
-
                         <div className="form-group">
                         </div>
                         <button className="btn btn-secondary btn-block">Delete User</button>
