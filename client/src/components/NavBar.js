@@ -14,17 +14,17 @@ const Navbar = () => {
       <Nav>
         <Bars />
         <NavMenu>
-          <NavLink to='/InputUser' activeStyle>
+          <NavLink to='/InputUser' activestyle="true">
             Add user
           </NavLink>
-          <NavLink to='/EditUser' activeStyle>
+          <NavLink to='/EditUser' activestyle="true">
             Edit User
           </NavLink>
-          <NavLink to='/DeleteUser' activeStyle>
+          <NavLink to='/DeleteUser' activestyle="true">
             Delete User
           </NavLink>
  
-          {/* <NavLink to='/Sign-Out' activeStyle>
+          {/* <NavLink to='/Sign-Out' activeStyle="true">
             Sign Out
           </NavLink> */}
           {/* Second Nav */}

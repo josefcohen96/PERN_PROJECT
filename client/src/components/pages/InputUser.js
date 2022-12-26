@@ -17,7 +17,7 @@ const InputUser = () => {
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
-    }
+    };
     const onSubmit = async e => {
         e.preventDefault();
         try {

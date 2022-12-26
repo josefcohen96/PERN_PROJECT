@@ -13,7 +13,7 @@ const SignInPage = () => {
                     <input type="text" name="first_name" required />
                 </p>
                 <p>
-                    <label>Password</label>
+                    <label>Password     </label>
                     <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
                     <br/>
                     <input type="password" name="password" required />

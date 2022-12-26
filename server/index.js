@@ -16,15 +16,15 @@ app.post("/InputUser", async (req, res) => {
         const { first_name } = req.body;
         const { last_name } = req.body;
         const { email } = req.body;
-        const { phone_number} = req.body;
+        const { phone_number } = req.body;
         const { permission } = req.body;
         const { work_area } = req.body;
         const { speciality_product } = req.body;
         const { id } = req.body;
 
-        
+
         const newUser = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number, id, permission, work_area, speciality_product) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *",
-            [first_name, last_name, email, phone_number,id, permission, work_area, speciality_product ]);
+            [first_name, last_name, email, phone_number, id, permission, work_area, speciality_product]);
         res.json(newUser.rows[0]);
     } catch (err) {
         console.error(err.message);
@@ -32,7 +32,7 @@ app.post("/InputUser", async (req, res) => {
 })
 //GETS HOMEPAGE
 
-app.get("/",async (req,res) => {
+app.get("/", async (req, res) => {
     console.log("HEY")
 })
 //GETS ALL USERS 
@@ -95,3 +95,43 @@ app.listen(5000, () => {
         console.error(err.message);
     }
 });
+
+
+app.get("/users/:id", async (req, res) => { // looking for specific id 
+    try {
+        console.log(req.params);
+        const { id } = req.params; // save the id 
+        const user = await pool.query("SELECT * FROM users  WHERE  id=$1", [id]) // search for the id in the specific table 
+
+        res.json(user.rows[0]) // print the first row in the table 
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.get("/works", async (req, res) => {
+    try {
+        console.log(req.params);
+        const allWorks = await pool.query("SELECT * FROM works");
+        res.json(allWorks.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+app.post('/works', async (req, res) => {
+    try {
+        const { task_name } = req.body;
+        const { task_id } = req.body;
+        const { product_id } = req.body;
+        const { frequency } = req.body;
+
+        const newWork = await pool.query("INSERT INTO works (task_name, task_id, product_id, frequency) VALUES($1,$2,$3,$4) RETURNING *",
+            [task_name, task_id, product_id, frequency]);
+        res.json(newWork.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+    }
+
+});
+

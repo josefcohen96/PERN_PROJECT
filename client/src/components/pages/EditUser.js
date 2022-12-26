@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import TextBox from "./TextBox"
+
 const EditUser = () => {
 
     const [user, setUser] = useState({
@@ -19,7 +19,6 @@ const EditUser = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
-
             });
             console.log(user)
             console.log(JSON.stringify(user))
