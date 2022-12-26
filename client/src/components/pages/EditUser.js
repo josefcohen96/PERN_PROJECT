@@ -15,8 +15,8 @@ const EditUser = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/InputUser", {
-                method: "POST",
+            const response = await fetch("http://localhost:5000/EditUser", {
+                method: "put",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
             });

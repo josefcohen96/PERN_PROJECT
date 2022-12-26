@@ -61,7 +61,7 @@ app.get("/users/:id", async (req, res) => { // looking for specific id
 })
 //UPDATE USER
 
-app.put("/users/:id", async (req, res) => {
+app.put("/EditUser/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const { phone_number } = req.body;
@@ -82,7 +82,7 @@ app.delete("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const deleteUser = await pool.query("DELETE FROM users WHERE id= $1", [id]);
-
+        res.json("user was deleted")
     } catch (err) {
         console.error(err.message)
     }
