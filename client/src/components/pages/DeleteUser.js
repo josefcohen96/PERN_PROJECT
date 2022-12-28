@@ -36,7 +36,6 @@ const DeleteUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="id"
                                 name="id"
-                                value={id}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>

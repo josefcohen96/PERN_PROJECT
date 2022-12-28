@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
+import "./WorkPage.css"
+
+import styled from 'styled-components';
 
 function WorksList() {
     // ###################  DISPLAY ALL WORKS ########################
@@ -30,6 +34,7 @@ function WorksList() {
     });
     const { task_name, task_id, product_id, frequency } = work
     const onInputChange = e => {
+        e.preventDefault();
         setWork({ ...work, [e.target.name]: e.target.value });
     }
     const onSubmit = async e => {
@@ -48,6 +53,15 @@ function WorksList() {
             console.error(err.message)
         }
     };
+    const Button = styled.button`
+  background-color: green;
+  color: white;
+  font-size: 14px;
+  padding: 10px 0px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+`;
 
     return (
         <div className="container">
@@ -79,23 +93,27 @@ function WorksList() {
                             <input
                                 type="text"
                                 className="form-control form-control-lg"
-                                placeholder="Enter product id"
+                                placeholder="Enter task id"
                                 name="product_id"
                                 value={product_id}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
                         <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter frequency"
-                                name="frequency"
-                                value={frequency}
-                                onChange={e => onInputChange(e)}
-                            />
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic" name="frequencyww" value={frequency} onChange={e => onInputChange(e)}
+>
+                                    Daily
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item value={"weekly"}>Weekly</Dropdown.Item>
+                                    <Dropdown.Item value={"monthly"}>Monthly</Dropdown.Item>
+                                    <Dropdown.Item value={"yearly"}>Yearly</Dropdown.Item>
+                                </Dropdown.Menu>
+
+                            </Dropdown>
                         </div>
-                        <button className="btn btn-secondary btn-block">Create Work</button>
+                        <Button className="btn btn-secondary btn-block">Create Work</Button>
                         <div>
                             <div>
                             </div>
@@ -120,8 +138,8 @@ function WorksList() {
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
 
     );
 }

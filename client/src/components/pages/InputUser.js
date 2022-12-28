@@ -2,21 +2,35 @@ import React, { useState } from "react";
 // import TextBox from "./TextBox"
 const InputUser = () => {
 
+
     const [user, setUser] = useState({
         first_name: "",
         last_name: "",
         phone_number: "",
         id: "",
-        email: "",
+        email: "example@gmail.com",
         permission: "",
         work_area: "",
-        speciality_product: ""
+        speciality_product: "",
     });
+    const [errors, setErrors] = useState({});
 
-    const { first_name, last_name, email, phone_number, id, permission, work_area, speciality_product } = user;
+    const validateEmail = email => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    };
 
     const onInputChange = e => {
-        setUser({ ...user, [e.target.name]: e.target.value });
+        e.preventDefault();
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+        if (name === 'email' && !validateEmail(value)) {
+            setErrors({ ...errors, email: 'Please enter a valid email address' });
+
+        } else {
+            setErrors({ ...errors, email: '' });
+        }
+
     };
     const onSubmit = async e => {
         e.preventDefault();
@@ -46,7 +60,7 @@ const InputUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Enter first name"
                                 name="first_name"
-                                value={first_name}
+                                value={user.first_name}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
@@ -56,19 +70,23 @@ const InputUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Enter last name"
                                 name="last_name"
-                                value={last_name}
+                                value={user.last_name}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
                         <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter E-mail"
-                                name="email"
-                                value={email}
-                                onChange={e => onInputChange(e)}
-                            />
+                            <label>
+                                <input
+                                    type="text"
+                                    className="form-control form-control-lg"
+                                    placeholder="Enter E-mail"
+                                    name="email"
+                                    value={user.email}
+                                    onChange={e => onInputChange(e)}
+                                />
+                            </label>
+                            {errors.email && <p className="error">{errors.email}</p>}
+
                         </div>
                         <div className="form-group">
                             <input
@@ -76,7 +94,7 @@ const InputUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Enter phone number"
                                 name="phone_number"
-                                value={phone_number}
+                                value={user.phone_number}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
@@ -86,7 +104,7 @@ const InputUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Enter id"
                                 name="id"
-                                value={id}
+                                value={user.id}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
@@ -96,7 +114,7 @@ const InputUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Enter permission"
                                 name="permission"
-                                value={permission}
+                                value={user.permission}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
@@ -106,7 +124,7 @@ const InputUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Enter work_area"
                                 name="work_area"
-                                value={work_area}
+                                value={user.work_area}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
@@ -116,14 +134,14 @@ const InputUser = () => {
                                 className="form-control form-control-lg"
                                 placeholder="Enter speciality_product"
                                 name="speciality_product"
-                                value={speciality_product}
+                                value={user.speciality_product}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
 
                         <div className="form-group">
                         </div>
-                        <button className="btn btn-secondary btn-block">Create User</button>
+                        <button className="btn btn-secondary btn-block" disabled={!!errors.email} >Create User</button>
                     </form>
                 </div>
             </div>
