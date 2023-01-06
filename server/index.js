@@ -10,6 +10,18 @@ app.use(express.json());
 
 //ROUTES//
 
+
+app.post("/LoginPage", async (req, res) => {
+    const bcrypt = require('bcrypt');
+
+    const validateUser = async (username, password) => {
+        const result = await pool.query("SELECT password FROM users WHERE username = $1", [username]);
+        const user = result.rows[0];
+        if (!user) return false;
+        const isValid = await bcrypt.compare(password, user.password);
+        return isValid;
+    };
+})
 // create a USER
 app.post("/InputUser", async (req, res) => {
     try {

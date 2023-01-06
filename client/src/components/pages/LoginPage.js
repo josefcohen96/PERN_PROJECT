@@ -1,28 +1,54 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
 
-import '../../App.css' 
+
+import '../../App.css'
 
 const SignInPage = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const validateUser = async (username, password) => {
+        try {
+            const response = await fetch('http://localhost:5000/LoginPage/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    };
+
+    const handleLogin = async () => {
+        const isValid = await validateUser(username, password);
+        if (isValid) {
+            // Navigate to the home page
+        } else {
+            setError('Invalid username or password');
+        }
+    };
     return (
-        <div className="text-center m-5-auto">
-            <h2>Sign in to us</h2>
-            <form action="/home">
-                <p>
-                    <label>Username or email address</label><br/>
-                    <input type="text" name="first_name" required />
-                </p>
-                <p>
-                    <label>Password     </label>
-                    <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
-                    <br/>
-                    <input type="password" name="password" required />
-                </p>
-                <p>
-                    <button id="sub_btn" type="submit">Login</button>
-                </p>
-            </form>
-        </div>
-    )
-}
+        <form>
+            {error && <p>{error}</p>}
+            <label>
+                Username:
+                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+            </label>
+            <br />
+            <label>
+                Password:
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            </label>
+            <br />
+            <button type="button" onClick={handleLogin}>
+                Login
+            </button>
+        </form>
+    );
+};
 export default SignInPage;

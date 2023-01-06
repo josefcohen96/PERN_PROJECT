@@ -4,7 +4,7 @@ const InputUser = () => {
 
 
     const [user, setUser] = useState({
-        first_name: "",
+        first_name: "yosef",
         last_name: "",
         phone_number: "",
         id: "",
@@ -19,21 +19,27 @@ const InputUser = () => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
     };
+    const validateFirstName = first_name => {
+        const re = /^[a-zA-Z]+$/;
+        return re.test(first_name);
+    };
 
     const onInputChange = e => {
         e.preventDefault();
+
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
+
         if (name === 'email' && !validateEmail(value)) {
             setErrors({ ...errors, email: 'Please enter a valid email address' });
-
-        } else {
+          } else {
             setErrors({ ...errors, email: '' });
-        }
+          }
 
     };
     const onSubmit = async e => {
         e.preventDefault();
+
         try {
             const response = await fetch("http://localhost:5000/InputUser", {
                 method: "POST",
@@ -55,14 +61,21 @@ const InputUser = () => {
                     <h3 className="text-center mb-4">Add User</h3>
                     <form onSubmit={e => onSubmit(e)}>
                         <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter first name"
-                                name="first_name"
-                                value={user.first_name}
-                                onChange={e => onInputChange(e)}
-                            />
+                            <label>
+
+                                <input
+                                    type="text"
+
+                                    className="form-control form-control-lg"
+                                    placeholder="Enter first name"
+                                    name="first_name"
+                                    value={user.first_name}
+                                    onChange={e => onInputChange(e)}
+                                />
+                            </label>
+
+                            {errors.first_name && <p className="error">{errors.first_name}</p>}
+
                         </div>
                         <div className="form-group">
                             <input
@@ -83,6 +96,7 @@ const InputUser = () => {
                                     name="email"
                                     value={user.email}
                                     onChange={e => onInputChange(e)}
+
                                 />
                             </label>
                             {errors.email && <p className="error">{errors.email}</p>}

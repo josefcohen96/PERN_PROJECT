@@ -13,7 +13,7 @@ export default function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route exac path="/" element={<LoginPage />} />
+        <Route exac path="/LoginPage" element={<LoginPage />} />
         <Route path="/InputUser" element={<InputUser />} />
         <Route path='/EditUser' element={<EditUser />} />
         <Route path='/DeleteUser' element={<DeleteUser />} />
