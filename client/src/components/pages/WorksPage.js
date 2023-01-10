@@ -53,15 +53,7 @@ function WorksList() {
             console.error(err.message)
         }
     };
-    const Button = styled.button`
-    background-color: green;
-    color: white;
-    font-size: 14px;
-    padding: 10px 0px;
-    border-radius: 5px;
-    margin: 10px 0px;
-    cursor: pointer;
-`;
+
 
     return (
         <div className="container">
@@ -101,19 +93,21 @@ function WorksList() {
                         </div>
                         <div className="form-group">
                             <Dropdown>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic" name="frequencyww" value={frequency} onChange={e => onInputChange(e)}
+                                <Dropdown.Toggle variant="success" id="dropdown-basic" name="frequency" value={frequency} onChange={e => onInputChange(e)}
                                 >
-                                    Daily
+                                    {work.frequency ? work.frequency : "Daily"}
+                                    
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item value={"weekly"}>Weekly</Dropdown.Item>
-                                    <Dropdown.Item value={"monthly"}>Monthly</Dropdown.Item>
-                                    <Dropdown.Item value={"yearly"}>Yearly</Dropdown.Item>
+                                    <Dropdown.Item value={"Daily"} onClick={() => setWork({ ...work, frequency: "Daily" })} >Daily</Dropdown.Item>
+                                    <Dropdown.Item value={"Weekly"} onClick={() => setWork({ ...work, frequency: "weekly" })} >Weekly</Dropdown.Item>
+                                    <Dropdown.Item value={"Monthly"} onClick={() => setWork({ ...work, frequency: "monthly" })} >monthly</Dropdown.Item>
+                                    <Dropdown.Item value={"Yearly"} onClick={() => setWork({ ...work, frequency: "yearly" })} >yearly</Dropdown.Item>
                                 </Dropdown.Menu>
 
                             </Dropdown>
                         </div>
-                        <Button className="btn btn-secondary btn-block">Create Work</Button>
+                        <button className="btn btn-secondary btn-block">Create Work</button>
                         <div>
                             <div>
                             </div>

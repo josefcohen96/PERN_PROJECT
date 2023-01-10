@@ -4,27 +4,30 @@ import {
   NavLink,
   Bars,
   NavMenu,
-//   NavBtn,
-//   NavBtnLink,
+  //   NavBtn,
+  //   NavBtnLink,
 } from './NavbarElements';
- // Import the CSS
- 
+// Import the CSS
+
 const Navbar = () => {
   return (
     <>
       <Nav>
         <Bars className='Bars' />
-        <NavMenu  className='NavMenu' >
+        <NavMenu className='NavMenu' >
           <NavLink className='NavLink' to='/InputUser' activestyle="true">
             Add user
           </NavLink>
           <NavLink className='NavLink' to='/EditUser' activestyle="true">
             Edit User
           </NavLink>
-          <NavLink  className='NavLink' to='/DeleteUser' activestyle="true">
+          <NavLink className='NavLink' to='/DeleteUser' activestyle="true">
             Delete User
           </NavLink>
- 
+          <NavLink className='NavLink' to='/Works' activestyle="true">
+            Works
+          </NavLink>
+
           {/* <NavLink to='/Sign-Out' activeStyle="true">
             Sign Out
           </NavLink> */}
@@ -38,5 +41,5 @@ const Navbar = () => {
     </>
   );
 };
-  
+
 export default Navbar;
