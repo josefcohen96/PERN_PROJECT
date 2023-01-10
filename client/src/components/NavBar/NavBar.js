@@ -7,20 +7,21 @@ import {
 //   NavBtn,
 //   NavBtnLink,
 } from './NavbarElements';
-  
+ // Import the CSS
+ 
 const Navbar = () => {
   return (
     <>
       <Nav>
-        <Bars />
-        <NavMenu>
-          <NavLink to='/InputUser' activestyle="true">
+        <Bars className='Bars' />
+        <NavMenu  className='NavMenu' >
+          <NavLink className='NavLink' to='/InputUser' activestyle="true">
             Add user
           </NavLink>
-          <NavLink to='/EditUser' activestyle="true">
+          <NavLink className='NavLink' to='/EditUser' activestyle="true">
             Edit User
           </NavLink>
-          <NavLink to='/DeleteUser' activestyle="true">
+          <NavLink  className='NavLink' to='/DeleteUser' activestyle="true">
             Delete User
           </NavLink>
  

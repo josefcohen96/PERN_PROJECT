@@ -10,6 +10,37 @@ app.use(express.json());
 
 //ROUTES//
 
+async function validateUser(user_name, password) {
+    // Query the database for a user with the given user_name
+    const result = await pool.query("SELECT password FROM users WHERE user_name = $1", [user_name]);
+
+    // If no user is found, return false
+    if (result.rows.length === 0) {
+        return false;
+    }
+
+    // Get the hashed password for the user
+    const hashedPassword = result.rows[0].password;
+
+    // Use bcrypt to compare the given password with the hashed password
+    const isValid = await bcrypt.compare(password, hashedPassword);
+
+    // Return the result of the comparison
+    return isValid;
+}
+
+app.post("/login", async (req, res) => {
+    const { user_name, password } = req.body;
+    console.log(user_name,password)
+    const isValid = await validateUser(user_name, password);
+    if (isValid) {
+        console.log("currect details")
+        res.redirect("/InputUser");
+    } else {
+        // User's credentials are invalid, send an error message
+        console.log("Wrong details")
+    }
+});
 // create a USER
 app.post("/InputUser", async (req, res) => {
     try {
