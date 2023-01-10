@@ -4,7 +4,7 @@ const InputUser = () => {
 
 
     const [user, setUser] = useState({
-        first_name: "",
+        first_name: "yosef",
         last_name: "",
         phone_number: "",
         id: "",
@@ -17,6 +17,7 @@ const InputUser = () => {
 
     const onInputChange = e => {
         e.preventDefault();
+
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
 
@@ -24,6 +25,7 @@ const InputUser = () => {
     };
     const onSubmit = async e => {
         e.preventDefault();
+
         try {
             const response = await fetch("http://localhost:5000/InputUser", {
                 method: "POST",
@@ -45,14 +47,20 @@ const InputUser = () => {
                     <h3 className="text-center mb-4">Add User</h3>
                     <form onSubmit={e => onSubmit(e)}>
                         <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter first name"
-                                name="first_name"
-                                value={user.first_name}
-                                onChange={e => onInputChange(e)}
-                            />
+                            <label>
+
+                                <input
+                                    type="text"
+
+                                    className="form-control form-control-lg"
+                                    placeholder="Enter first name"
+                                    name="first_name"
+                                    value={user.first_name}
+                                    onChange={e => onInputChange(e)}
+                                />
+                            </label>
+
+
                         </div>
                         <div className="form-group">
                             <input
@@ -73,6 +81,7 @@ const InputUser = () => {
                                     name="email"
                                     value={user.email}
                                     onChange={e => onInputChange(e)}
+
                                 />
                             </label>
 
