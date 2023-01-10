@@ -13,15 +13,15 @@ export default function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route exac path="/LoginPage" element={<LoginPage />} />
+        <Route exac path="/" exact={true} element={<LoginPage />} />
         <Route path="/InputUser" element={<InputUser />} />
         <Route path='/EditUser' element={<EditUser />} />
         <Route path='/DeleteUser' element={<DeleteUser />} />
-        <Route path= '/works' element={<WorksPage/>} />
-
+        <Route path='/works' element={<WorksPage />} />
         {/* <Route path='/blogs' component={Blogs} /> */}
         {/* <Route path='/sign-up' component={SignUp} /> */}
       </Routes>
     </Router>
   );
 }
+ 

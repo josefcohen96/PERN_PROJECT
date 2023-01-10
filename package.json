@@ -6,6 +6,7 @@
     "@mui/lab": "^5.0.0-alpha.114",
     "@mui/material": "^5.11.2",
     "@types/react-select": "^5.0.1",
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.2.3",
+    "react-hook-form": "^7.41.5"
   }
 }

@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const bcrypt = require("bcrypt");
+
 
 
 //middleware
@@ -10,18 +12,44 @@ app.use(express.json());
 
 //ROUTES//
 
+async function validateUser(user_name, password) {
+    try {
+      // Query the database for a user with the given user_name
+      const result = await pool.query("SELECT password FROM passwords WHERE user_name = $1", [user_name]);
+  
+      // If no user is found, return false
+      if (result.rowCount === 0) {
+        return false;
+      }
+  
+      // Get the hashed password for the user
+      const hashedPassword = result.rows[0].password;
+  
+      // Compare the given plain text password with the hashed password
+      if (password === hashedPassword) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+  
 
-app.post("/LoginPage", async (req, res) => {
-    const bcrypt = require('bcrypt');
-
-    const validateUser = async (username, password) => {
-        const result = await pool.query("SELECT password FROM users WHERE username = $1", [username]);
-        const user = result.rows[0];
-        if (!user) return false;
-        const isValid = await bcrypt.compare(password, user.password);
-        return isValid;
-    };
-})
+app.post("/login", async (req, res) => {
+    const { user_name, password } = req.body;
+    console.log(user_name, password)
+    const isValid = await validateUser(user_name, password);
+    if (isValid) {
+        console.log("currect details")
+        res.redirect("/Works");
+    } else {
+        // User's credentials are invalid, send an error message
+        console.log("Wrong details")
+    }
+});
 // create a USER
 app.post("/InputUser", async (req, res) => {
     try {
@@ -42,6 +70,23 @@ app.post("/InputUser", async (req, res) => {
         console.error(err.message);
     }
 })
+
+app.post('/works', async (req, res) => {
+    try {
+        const { task_name } = req.body;
+        const { task_id } = req.body;
+        const { product_id } = req.body;
+        const { frequency } = req.body;
+
+        const newWork = await pool.query("INSERT INTO works (task_name, task_id, product_id, frequency) VALUES($1,$2,$3,$4) RETURNING *",
+            [task_name, task_id, product_id, frequency]);
+        res.json(newWork.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+    }
+
+});
 //GETS HOMEPAGE
 
 app.get("/", async (req, res) => {
@@ -81,6 +126,7 @@ app.put("/EditUser/:id", async (req, res) => {
             "UPDATE users SET phone_number = $1 WHERE id = $2",
             [phone_number, id]
         );
+        console.log(id, phone_number)
         res.json("Users was updated ")
     } catch (err) {
         console.error(err.message)
@@ -130,20 +176,5 @@ app.get("/works", async (req, res) => {
         console.error(err.message);
     }
 });
-app.post('/works', async (req, res) => {
-    try {
-        const { task_name } = req.body;
-        const { task_id } = req.body;
-        const { product_id } = req.body;
-        const { frequency } = req.body;
 
-        const newWork = await pool.query("INSERT INTO works (task_name, task_id, product_id, frequency) VALUES($1,$2,$3,$4) RETURNING *",
-            [task_name, task_id, product_id, frequency]);
-        res.json(newWork.rows[0]);
-
-    } catch (err) {
-        console.error(err.message);
-    }
-
-});
 

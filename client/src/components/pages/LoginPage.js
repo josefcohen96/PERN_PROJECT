@@ -1,54 +1,80 @@
-import React, { useState } from 'react';
+// import React from 'react'
+// import '../../App.css'
+
+// const SignInPage = () => {
+
+//     return (
+//         <div className="text-center m-5-auto">
+//             <h2>Log in </h2>
+//             <form action="/login" method="post">
+//                 <p>
+//                     <form action="/login" method="post">
+//                         <label>Username:</label>
+//                         <input type="text" name="user_name" />
+//                         <br />
+//                         <label>Password:</label>
+//                         <input type="password" name="password" />
+//                         <br />
+//                         <input type="button" value="Log in"/>
+//                     </form>
+//                 </p>
+//             </form>
+//         </div>
+//     )
+// }
+// export default SignInPage;
 
 
-import '../../App.css'
+import React, { useEffect, useState } from 'react';
+import './LoginPage.css'; // Import the CSS
 
-const SignInPage = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const validateUser = async (username, password) => {
-        try {
-            const response = await fetch('http://localhost:5000/LoginPage/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            });
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error(error);
-            return false;
-        }
-    };
+function Login() {
+  const [user_name, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleLogin = async () => {
-        const isValid = await validateUser(username, password);
-        if (isValid) {
-            // Navigate to the home page
-        } else {
-            setError('Invalid username or password');
-        }
-    };
-    return (
-        <form>
-            {error && <p>{error}</p>}
-            <label>
-                Username:
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <br />
-            <label>
-                Password:
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </label>
-            <br />
-            <button type="button" onClick={handleLogin}>
-                Login
-            </button>
-        </form>
-    );
-};
-export default SignInPage;
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_name, password }),
+
+      });
+      console.log(user_name, password)
+      console.log(JSON.stringify({ user_name, password }))
+      console.log(response)
+    } catch (err) {
+      console.error(err.message)
+    }
+
+  };
+
+  return (
+    <form className="login-form" onSubmit={handleSubmit}>
+      <label>
+        Username:
+        <input
+          className="login-input"
+          type="text"
+          value={user_name}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          className="login-input"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <br />
+      <button className="login-button" type="submit">Log In</button>
+    </form>
+  );
+}
+
+export default Login;
