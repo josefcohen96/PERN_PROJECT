@@ -96,7 +96,7 @@ function WorksList() {
                                 <Dropdown.Toggle variant="success" id="dropdown-basic" name="frequency" value={frequency} onChange={e => onInputChange(e)}
                                 >
                                     {work.frequency ? work.frequency : "Daily"}
-                                    
+
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item value={"Daily"} onClick={() => setWork({ ...work, frequency: "Daily" })} >Daily</Dropdown.Item>
@@ -113,11 +113,15 @@ function WorksList() {
                             </div>
                             <div>
                                 <table class="table mt-5 text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Task ID</th>
+                                            <th>Task Name</th>
+                                            <th>Frequency</th>
+                                            <th>Product ID</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
-                                        <th>Task ID</th>
-                                        <th>Task Name</th>
-                                        <th>Frequency</th>
-                                        <th>Product ID</th>
                                         {workouts.map(work => (
                                             <tr>
                                                 <td>{work.task_id}</td>
