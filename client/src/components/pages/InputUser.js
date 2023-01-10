@@ -13,23 +13,13 @@ const InputUser = () => {
         work_area: "",
         speciality_product: "",
     });
-    const [errors, setErrors] = useState({});
 
-    const validateEmail = email => {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    };
 
     const onInputChange = e => {
         e.preventDefault();
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
-        if (name === 'email' && !validateEmail(value)) {
-            setErrors({ ...errors, email: 'Please enter a valid email address' });
 
-        } else {
-            setErrors({ ...errors, email: '' });
-        }
 
     };
     const onSubmit = async e => {
@@ -85,7 +75,6 @@ const InputUser = () => {
                                     onChange={e => onInputChange(e)}
                                 />
                             </label>
-                            {errors.email && <p className="error">{errors.email}</p>}
 
                         </div>
                         <div className="form-group">
@@ -138,10 +127,9 @@ const InputUser = () => {
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
-
                         <div className="form-group">
                         </div>
-                        <button className="btn btn-secondary btn-block" disabled={!!errors.email} >Create User</button>
+                        <button className="btn btn-secondary btn-block" >Create User</button>
                     </form>
                 </div>
             </div>

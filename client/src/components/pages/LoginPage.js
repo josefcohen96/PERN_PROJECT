@@ -29,20 +29,20 @@ import React, { useEffect, useState } from 'react';
 import './LoginPage.css'; // Import the CSS
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [user_name, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/Works", {
+      const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ user_name, password }),
 
       });
-      console.log(username, password)
-      console.log(JSON.stringify({ username, password }))
+      console.log(user_name, password)
+      console.log(JSON.stringify({ user_name, password }))
       console.log(response)
     } catch (err) {
       console.error(err.message)
@@ -57,7 +57,7 @@ function Login() {
         <input
           className="login-input"
           type="text"
-          value={username}
+          value={user_name}
           onChange={(e) => setUsername(e.target.value)}
         />
       </label>
