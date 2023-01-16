@@ -43,7 +43,7 @@ app.post("/login", async (req, res) => {
     const isValid = await validateUser(user_name, password);
     if (isValid) {
         console.log("currect details")
-        res.redirect("/Works");
+        res.redirect("http://localhost:3000/Works");
     } else {
         // User's credentials are invalid, send an error message
         console.log("Wrong details")

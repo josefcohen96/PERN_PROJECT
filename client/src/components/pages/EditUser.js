@@ -50,9 +50,7 @@ const EditUser = () => {
                                 value={last_name}
                                 onChange={e => onInputChange(e)}
                             />
-                            
                         </div>
-
                         <div className="form-group">
                         </div>
                         <button className="btn btn-secondary btn-block">Edit User</button>

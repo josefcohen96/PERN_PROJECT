@@ -1,31 +1,4 @@
-// import React from 'react'
-// import '../../App.css'
-
-// const SignInPage = () => {
-
-//     return (
-//         <div className="text-center m-5-auto">
-//             <h2>Log in </h2>
-//             <form action="/login" method="post">
-//                 <p>
-//                     <form action="/login" method="post">
-//                         <label>Username:</label>
-//                         <input type="text" name="user_name" />
-//                         <br />
-//                         <label>Password:</label>
-//                         <input type="password" name="password" />
-//                         <br />
-//                         <input type="button" value="Log in"/>
-//                     </form>
-//                 </p>
-//             </form>
-//         </div>
-//     )
-// }
-// export default SignInPage;
-
-
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './LoginPage.css'; // Import the CSS
 
 function Login() {

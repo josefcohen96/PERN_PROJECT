@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-// import TextBox from "./TextBox"
 const InputUser = () => {
-
 
     const [user, setUser] = useState({
         first_name: "yosef",
@@ -13,25 +11,19 @@ const InputUser = () => {
         work_area: "",
         speciality_product: "",
     });
-
-
     const onInputChange = e => {
         e.preventDefault();
 
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
-
-
     };
     const onSubmit = async e => {
         e.preventDefault();
-
         try {
             const response = await fetch("http://localhost:5000/InputUser", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
-
             });
             console.log(user)
             console.log(JSON.stringify(user))
@@ -59,8 +51,6 @@ const InputUser = () => {
                                     onChange={e => onInputChange(e)}
                                 />
                             </label>
-
-
                         </div>
                         <div className="form-group">
                             <input
@@ -84,7 +74,6 @@ const InputUser = () => {
 
                                 />
                             </label>
-
                         </div>
                         <div className="form-group">
                             <input

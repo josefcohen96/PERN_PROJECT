@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import "./WorkPage.css"
 
-import styled from 'styled-components';
 
 function WorksList() {
     // ###################  DISPLAY ALL WORKS ########################
@@ -85,7 +84,7 @@ function WorksList() {
                             <input
                                 type="text"
                                 className="form-control form-control-lg"
-                                placeholder="Enter task id"
+                                placeholder="Enter product id"
                                 name="product_id"
                                 value={product_id}
                                 onChange={e => onInputChange(e)}

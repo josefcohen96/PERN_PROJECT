@@ -11,11 +11,10 @@ const DeleteUser = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:5000/${user.idid}`, {
+            const response = await fetch(`http://localhost:5000/${user.id}`, {
                 method: "DELETE ",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
-
             });
             console.log(user)
             console.log(JSON.stringify(user))

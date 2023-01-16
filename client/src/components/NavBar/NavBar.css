@@ -43,10 +43,6 @@
     font-weight:900;
   }
   
-  .NavLink:hover {
-    background-color: #3f51b5;
-}
-  
   /* Media Queries */
   @media screen and (max-width: 768px) {
     .Nav {
