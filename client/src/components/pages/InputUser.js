@@ -84,17 +84,7 @@ const InputUser = () => {
                                 value={user.phone_number}
                                 onChange={e => onInputChange(e)}
                             />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter id"
-                                name="id"
-                                value={user.id}
-                                onChange={e => onInputChange(e)}
-                            />
-                        </div>
+                        </div> 
                         <div className="form-group">
                             <input
                                 type="text"

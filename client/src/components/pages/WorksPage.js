@@ -31,7 +31,7 @@ function WorksList() {
         product_id: "",
         frequency: ""
     });
-    const { task_name, task_id, product_id, frequency } = work
+    const { task_name, task_id, frequency } = work
     const onInputChange = e => {
         e.preventDefault();
         setWork({ ...work, [e.target.name]: e.target.value });
@@ -77,16 +77,6 @@ function WorksList() {
                                 placeholder="Enter task id"
                                 name="task_id"
                                 value={task_id}
-                                onChange={e => onInputChange(e)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter product id"
-                                name="product_id"
-                                value={product_id}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>

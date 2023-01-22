@@ -1,6 +1,6 @@
 // import React, { Fragment } from "react";
 import InputUser from "./components/pages/InputUser";
-import DeleteUser from "./components/pages/DeleteUser";
+import UserDetails from "./components/pages/DeleteUser";
 import EditUser from "./components/pages/EditUser";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavBar/NavBar";
@@ -16,7 +16,7 @@ export default function App() {
         <Route exac path="/" exact={true} element={<LoginPage />} />
         <Route path="/InputUser" element={<InputUser />} />
         <Route path='/EditUser' element={<EditUser />} />
-        <Route path='/DeleteUser' element={<DeleteUser />} />
+        <Route path='/DeleteUser' element={<UserDetails />} />
         <Route path='/works' element={<WorksPage />} />
         {/* <Route path='/blogs' component={Blogs} /> */}
         {/* <Route path='/sign-up' component={SignUp} /> */}
