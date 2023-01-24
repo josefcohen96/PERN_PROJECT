@@ -20,8 +20,6 @@ function Login() {
         alert("Incorrect user name or password. Please try again");
         return;
       }
-      // If the login is successful, you can redirect the user to the home page or any other page
-      // for example:
       window.location.href = '/works';
     } catch (err) {
       console.error(err.message)

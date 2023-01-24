@@ -3,22 +3,16 @@ const app = express();
 const cors = require("cors");
 const pool = require("./db");
 
-
-
-
 //middleware
 app.use(cors());
-app.use(express.json());
-
-
+app.use(express.json());  
 
 //ROUTES//
-
 
 // DELETE USER
 app.delete("/users/:id", async (req, res) => {
     try {
-        console.log("hge")
+        console.log("user deleted")
         const id = req.params.id;
         await pool.query("DELETE FROM users WHERE id= $1", [id])
         res.json({ message: "user was deleted" });
@@ -28,7 +22,6 @@ app.delete("/users/:id", async (req, res) => {
     }
 })
 
-
 //GET A USER 
 
 app.get('/users/:id', async (req, res) => {
@@ -36,8 +29,8 @@ app.get('/users/:id', async (req, res) => {
         console.log(req.params); 
         const { id } = req.params;
         const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
-        console.log(result);
-         res.json(result);
+        // console.log(result);
+        res.json(result);
     } catch (err) {
         return res.status(500).json({ message: 'Internal server error' });
     }
@@ -45,7 +38,7 @@ app.get('/users/:id', async (req, res) => {
 
 app.get("/works", async (req, res) => {
     try {
-        console.log(req.params);
+        // console.log(req.params);
         const allWorks = await pool.query("SELECT * FROM works");
         res.json(allWorks.rows);
     } catch (err) {
@@ -161,9 +154,6 @@ app.put("/EditUser/:id", async (req, res) => {
 
     }
 })
-
-
-
 
 
 app.listen(5000)
