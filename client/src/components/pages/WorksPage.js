@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import "./WorkPage.css"
+import Navbar from "../NavBar/NavBar";
 
 
 function WorksList() {
@@ -56,6 +57,7 @@ function WorksList() {
 
     return (
         <div className="container">
+            <Navbar />
             <div className="row">
                 <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
                     <h3 className="text-center mb-4">Add Work</h3>

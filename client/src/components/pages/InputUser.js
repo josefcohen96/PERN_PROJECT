@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Navbar from "../NavBar/NavBar";
+
 const InputUser = () => {
 
     const [user, setUser] = useState({
@@ -34,6 +36,8 @@ const InputUser = () => {
     };
     return (
         <div className="container">
+            <Navbar />
+
             <div className="row">
                 <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
                     <h3 className="text-center mb-4">Add User</h3>
@@ -84,7 +88,7 @@ const InputUser = () => {
                                 value={user.phone_number}
                                 onChange={e => onInputChange(e)}
                             />
-                        </div> 
+                        </div>
                         <div className="form-group">
                             <input
                                 type="text"

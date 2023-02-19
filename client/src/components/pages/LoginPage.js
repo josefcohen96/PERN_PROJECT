@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginPage.css'; // Import the CSS
 
-function Login() {
+function LoginPage({ onLogin }) {
   const [user_name, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,6 +20,7 @@ function Login() {
         alert("Incorrect user name or password. Please try again");
         return;
       }
+      onLogin();
       window.location.href = '/works';
     } catch (err) {
       console.error(err.message)
@@ -55,4 +56,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;
