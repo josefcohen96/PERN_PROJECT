@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../NavBar/NavBar";
 
 const EditUser = () => {
 
@@ -7,7 +8,7 @@ const EditUser = () => {
         last_name: "",
     });
 
-    const { first_name, last_name} = user;
+    const { first_name, last_name } = user;
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -29,6 +30,7 @@ const EditUser = () => {
     };
     return (
         <div className="container">
+            <Navbar />
             <div className="row">
                 <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
                     <h3 className="text-center mb-4">Enter user details</h3>
@@ -50,9 +52,7 @@ const EditUser = () => {
                                 value={last_name}
                                 onChange={e => onInputChange(e)}
                             />
-                            
                         </div>
-
                         <div className="form-group">
                         </div>
                         <button className="btn btn-secondary btn-block">Edit User</button>

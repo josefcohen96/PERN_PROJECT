@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import "./WorkPage.css"
+import Navbar from "../NavBar/NavBar";
 
-import styled from 'styled-components';
 
 function WorksList() {
     // ###################  DISPLAY ALL WORKS ########################
@@ -32,7 +32,7 @@ function WorksList() {
         product_id: "",
         frequency: ""
     });
-    const { task_name, task_id, product_id, frequency } = work
+    const { task_name, task_id, frequency } = work
     const onInputChange = e => {
         e.preventDefault();
         setWork({ ...work, [e.target.name]: e.target.value });
@@ -57,6 +57,7 @@ function WorksList() {
 
     return (
         <div className="container">
+            <Navbar />
             <div className="row">
                 <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
                     <h3 className="text-center mb-4">Add Work</h3>
@@ -78,16 +79,6 @@ function WorksList() {
                                 placeholder="Enter task id"
                                 name="task_id"
                                 value={task_id}
-                                onChange={e => onInputChange(e)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter task id"
-                                name="product_id"
-                                value={product_id}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>

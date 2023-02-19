@@ -3,80 +3,89 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  /* Navbar Styles */
-  .Nav {
+}
+
+/* Navbar Styles */
+.Nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: #3f51b5;
+    background-color: #1a202c;
     color: white;
-    position:relative;
-  }
-  
-  /* Bars Icon */
-  .Bars {
-    display: none;
+    font-size: 1.2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
+/* Nav Logo */
+.NavLogo {
+    font-weight: bold;
     font-size: 2rem;
-    color: white;
-    cursor: pointer;
-  }
-  
-  /* NavMenu Styles */
-  .NavMenu {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* NavMenu Styles */
+.NavMenu {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  /* NavLink Styles */
-  .NavLink {
-    color: #000;
+}
+
+/* NavLink Styles */
+.NavLink {
+    color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
     margin-left: 1rem;
-    font-size: 1.2rem;
     transition: background-color 0.2s ease-in-out;
-    font-family: 'Font Awesome 5 Free';
-    font-weight:900;
-  }
-  
-  .NavLink:hover {
-    background-color: #3f51b5;
 }
-  
-  /* Media Queries */
-  @media screen and (max-width: 768px) {
+
+.NavLink:hover {
+    background-color: #4a5568;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
     .Nav {
-      flex-wrap: wrap;
+        flex-direction: column;
+        align-items: flex-start;
     }
-  
-    .Bars {
-      display: block;
+
+    .NavLogo {
+        margin-bottom: 1rem;
     }
-  
+
     .NavMenu {
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #4CAF50;
-      width: 100%;
-      padding: 1rem;
-      display: none;
+        display: none;
     }
-  
-    .NavLink {
-      margin: 0.5rem 0;
-      width: 100%;
-      text-align: center;
+
+    .Bars {
+        display: block;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        margin-right: 1rem;
     }
-  
+
     .Bars:hover + .NavMenu {
-      display: block;
+        display: flex;
+        flex-direction: column;
+        background-color: #2d3748;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 1rem;
     }
-  }
-  
+
+    .NavLink {
+        margin: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+}

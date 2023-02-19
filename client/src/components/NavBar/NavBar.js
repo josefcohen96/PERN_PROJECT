@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Nav,
   NavLink,
-  Bars,
   NavMenu,
   //   NavBtn,
   //   NavBtnLink,
@@ -13,7 +12,6 @@ const Navbar = () => {
   return (
     <>
       <Nav>
-        <Bars className='Bars' />
         <NavMenu className='NavMenu' >
           <NavLink className='NavLink' to='/InputUser' activestyle="true">
             Add user

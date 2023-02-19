@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import TextBox from "./TextBox"
-const InputUser = () => {
+import Navbar from "../NavBar/NavBar";
 
+const InputUser = () => {
 
     const [user, setUser] = useState({
         first_name: "yosef",
@@ -13,15 +13,11 @@ const InputUser = () => {
         work_area: "",
         speciality_product: "",
     });
-
-
     const onInputChange = e => {
         e.preventDefault();
 
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
-
-
     };
     const onSubmit = async e => {
         e.preventDefault();
@@ -31,7 +27,6 @@ const InputUser = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
-
             });
             console.log(user)
             console.log(JSON.stringify(user))
@@ -42,6 +37,8 @@ const InputUser = () => {
     };
     return (
         <div className="container">
+            <Navbar />
+
             <div className="row">
                 <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
                     <h3 className="text-center mb-4">Add User</h3>
@@ -59,9 +56,6 @@ const InputUser = () => {
                                     onChange={e => onInputChange(e)}
                                 />
                             </label>
-
-                            {errors.first_name && <p className="error">{errors.first_name}</p>}
-
                         </div>
                         <div className="form-group">
                             <input
@@ -85,7 +79,6 @@ const InputUser = () => {
 
                                 />
                             </label>
-
                         </div>
                         <div className="form-group">
                             <input
@@ -94,16 +87,6 @@ const InputUser = () => {
                                 placeholder="Enter phone number"
                                 name="phone_number"
                                 value={user.phone_number}
-                                onChange={e => onInputChange(e)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Enter id"
-                                name="id"
-                                value={user.id}
                                 onChange={e => onInputChange(e)}
                             />
                         </div>
