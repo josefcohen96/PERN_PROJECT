@@ -25,6 +25,9 @@ const Navbar = () => {
           <NavLink className='NavLink' to='/Works' activestyle="true">
             Works
           </NavLink>
+          <NavLink className='NavLink' to='/Map' activestyle="true">
+            Map
+          </NavLink>
 
           {/* <NavLink to='/Sign-Out' activeStyle="true">
             Sign Out

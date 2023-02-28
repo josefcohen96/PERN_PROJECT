@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavBar/NavBar";
 import LoginPage from "./components/pages/LoginPage";
 import WorksPage from "./components/pages/WorksPage";
+import MapPage from "./components/map/MapPage";
 
-import "./App.css";
+import "./App.css"
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,6 +31,7 @@ export default function App() {
         <Route path='/EditUser' element={<EditUser />} />
         <Route path='/DeleteUser' element={<UserDetails />} />
         <Route path='/works' element={<WorksPage />} />
+        <Route path='/Map' element={<MapPage />} />
         {/* <Route path='/blogs' component={Blogs} /> */}
         {/* <Route path='/sign-up' component={SignUp} /> */}
       </Routes>
