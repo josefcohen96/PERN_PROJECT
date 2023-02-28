@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Petah Tikva",
+    "freq": "weekly",
+    "lastVisit": "2022-02-23",
+    "coordinates": [
+      32.091773,
+      34.885922
+    ]
+  },
+  {
+    "name": "Beitar Ilit",
+    "freq": "monthly",
+    "lastVisit": "2022-02-20",
+    "coordinates": [
+      31.7,
+      35.1
+    ]
+  },
+  {
+    "name": "Jerusalem",
+    "freq": "yearly",
+    "lastVisit": "2022-02-15",
+    "coordinates": [
+      31.758641,
+      35.215053
+    ]
+  },
+  {
+    "name": "Ashdod",
+    "freq": "daily",
+    "lastVisit": "2022-02-10",
+    "coordinates": [
+      31.778462,
+      34.639161
+    ]
+  },
+  {
+    "name": "Sderot",
+    "freq": "weekly",
+    "lastVisit": "2022-02-08",
+    "coordinates": [
+      31.523016,
+      34.588240
+    ]
+  },
+  {
+    "name": "Beer Sheva",
+    "freq": "monthly",
+    "lastVisit": "2022-02-05",
+    "coordinates": [
+      31.231262,
+      34.769808
+    ]
+  },
+  {
+    "name": "Kiryat 8",
+    "freq": "yearly",
+    "lastVisit": "2022-02-01",
+    "coordinates": [
+      33.204162,
+      35.571298
+    ]
+  },
+  {
+    "name": "Naharia",
+    "freq": "daily",
+    "lastVisit": "2022-01-28",
+    "coordinates": [
+      33.009945,
+      35.106394
+    ]
+  },
+  {
+    "name": "Eilat",
+    "freq": "weekly",
+    "lastVisit": "2022-01-25",
+    "coordinates": [
+      29.535157,
+      34.929416
+    ]
+  }
+]
