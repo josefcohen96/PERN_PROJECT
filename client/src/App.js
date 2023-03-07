@@ -7,7 +7,7 @@ import Navbar from "./components/NavBar/NavBar";
 import LoginPage from "./components/pages/LoginPage";
 import WorksPage from "./components/pages/WorksPage";
 import MapPage from "./components/map/MapPage";
-
+import LocationPage from "./components/pages/LocationPage";
 import "./App.css"
 
 export default function App() {
@@ -32,6 +32,7 @@ export default function App() {
         <Route path='/DeleteUser' element={<UserDetails />} />
         <Route path='/works' element={<WorksPage />} />
         <Route path='/Map' element={<MapPage />} />
+        <Route path="/location/:id" element={<LocationPage />} />
         {/* <Route path='/blogs' component={Blogs} /> */}
         {/* <Route path='/sign-up' component={SignUp} /> */}
       </Routes>

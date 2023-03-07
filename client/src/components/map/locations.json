@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "name": "Petah Tikva",
     "freq": "weekly",
     "lastVisit": "2022-02-23",
@@ -8,7 +9,8 @@
       34.885922
     ]
   },
-  {
+  {  
+    "id": "2",
     "name": "Beitar Ilit",
     "freq": "monthly",
     "lastVisit": "2022-02-20",
@@ -18,6 +20,7 @@
     ]
   },
   {
+    "id": "3",
     "name": "Jerusalem",
     "freq": "yearly",
     "lastVisit": "2022-02-15",
@@ -27,6 +30,7 @@
     ]
   },
   {
+    "id": "4",
     "name": "Ashdod",
     "freq": "daily",
     "lastVisit": "2022-02-10",
@@ -36,6 +40,7 @@
     ]
   },
   {
+    "id": "5",
     "name": "Sderot",
     "freq": "weekly",
     "lastVisit": "2022-02-08",
@@ -45,6 +50,7 @@
     ]
   },
   {
+    "id": "6",
     "name": "Beer Sheva",
     "freq": "monthly",
     "lastVisit": "2022-02-05",
@@ -54,6 +60,7 @@
     ]
   },
   {
+    "id": "7",
     "name": "Kiryat 8",
     "freq": "yearly",
     "lastVisit": "2022-02-01",
@@ -63,6 +70,7 @@
     ]
   },
   {
+    "id": "8",
     "name": "Naharia",
     "freq": "daily",
     "lastVisit": "2022-01-28",
@@ -72,6 +80,7 @@
     ]
   },
   {
+    "id": "9",
     "name": "Eilat",
     "freq": "weekly",
     "lastVisit": "2022-01-25",

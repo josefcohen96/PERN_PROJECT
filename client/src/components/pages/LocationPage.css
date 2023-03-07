@@ -1,0 +1,18 @@
+.location-page-container {
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .location-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .location-details p {
+    margin: 10px;
+  }
+  

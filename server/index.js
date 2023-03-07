@@ -2,13 +2,23 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
-
-//middleware
+const locations = require("../client/src/components/map/locations.json");//middleware
 app.use(cors());
-app.use(express.json());  
+app.use(express.json());
 
 //ROUTES//
 
+app.get("/location/:id", async (req, res) => {
+    console.log("location selected by id")
+    const id = req.params.id;
+    const location = locations.find((loc) => loc.id === id);
+    console.log(location)
+    if (location) {
+        res.json(location);
+    } else {
+        res.sendStatus(404);
+    }
+});
 // DELETE USER
 app.delete("/users/:id", async (req, res) => {
     try {
@@ -20,13 +30,13 @@ app.delete("/users/:id", async (req, res) => {
         console.error(err.message);
         res.json({ message: "Error deleting user" });
     }
-})
+});
 
 //GET A USER 
 
 app.get('/users/:id', async (req, res) => {
     try {
-        console.log(req.params); 
+        console.log(req.params);
         const { id } = req.params;
         const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
         // console.log(result);
@@ -86,6 +96,8 @@ app.post("/login", async (req, res) => {
         res.sendStatus(401)
     }
 });
+
+
 // create a USER
 app.post("/InputUser", async (req, res) => {
     try {
