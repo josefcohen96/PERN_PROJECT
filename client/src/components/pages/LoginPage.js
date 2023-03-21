@@ -21,7 +21,9 @@ function LoginPage({ onLogin }) {
         return;
       }
       onLogin();
+      sessionStorage.setItem('user_name', JSON.stringify(user_name));
       window.location.href = '/works';
+
     } catch (err) {
       console.error(err.message)
     }

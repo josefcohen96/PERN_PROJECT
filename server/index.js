@@ -5,6 +5,22 @@ const pool = require("./db");
 const locations = require("../client/src/components/map/locations.json");//middleware
 app.use(cors());
 app.use(express.json());
+// todo : get locations from db 
+// updated app.patch function
+
+app.patch('/locations/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { lastVisit } = req.body;
+        await pool.query("UPDATE FROM users WHERE id= $1", [id])
+
+        console.log('Location updated successfully');
+        res.json({ message: 'Location updated successfully' });
+    }
+    catch {
+        console.log('Location was not updated successfully');
+    }
+});
 
 //ROUTES//
 
@@ -19,6 +35,7 @@ app.get("/location/:id", async (req, res) => {
         res.sendStatus(404);
     }
 });
+
 // DELETE USER
 app.delete("/users/:id", async (req, res) => {
     try {
@@ -81,7 +98,7 @@ async function validateUser(user_name, password) {
         console.error(error);
         return false;
     }
-}
+};
 
 app.post("/login", async (req, res) => {
     const { user_name, password } = req.body;
@@ -116,7 +133,23 @@ app.post("/InputUser", async (req, res) => {
     } catch (err) {
         console.error(err.message);
     }
-})
+});
+
+app.post("/Locations", async (req, res) => {
+    try {   
+        console.log("/locations");
+        console.log(req.body);
+        const { id } = req.body;
+        const { name } = req.body;
+        const { lastvisit } = req.body;
+        const { coordinates } = req.body;
+        const newLocation = await pool.query("INSERT INTO locations (id, name, lastvisit,  coordinates) VALUES($1,$2,DATE($3),$4) RETURNING *",
+            [id, name, lastvisit, coordinates]);
+        res.json(newLocation.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 
 app.post('/works', async (req, res) => {
     try {
