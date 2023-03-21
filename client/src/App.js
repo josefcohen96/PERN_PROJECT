@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputUser from "./components/pages/InputUser";
+import InputLocation from "./components/pages/InputLocation";
 import UserDetails from "./components/pages/DeleteUser";
 import EditUser from "./components/pages/EditUser";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -33,6 +34,8 @@ export default function App() {
         <Route path='/works' element={<WorksPage />} />
         <Route path='/Map' element={<MapPage />} />
         <Route path="/location/:id" element={<LocationPage />} />
+        <Route path="/locations" element={<InputLocation />} />
+        {/* <Route path='/blogs' component={Blogs} /> */}
         {/* <Route path='/blogs' component={Blogs} /> */}
         {/* <Route path='/sign-up' component={SignUp} /> */}
       </Routes>

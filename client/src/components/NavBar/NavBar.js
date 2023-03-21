@@ -12,6 +12,7 @@ const Navbar = () => {
   return (
     <>
       <Nav>
+        <p>Logged in as {JSON.parse(sessionStorage.getItem('user_name'))} </p>
         <NavMenu className='NavMenu' >
           <NavLink className='NavLink' to='/InputUser' activestyle="true">
             Add user
@@ -28,12 +29,18 @@ const Navbar = () => {
           <NavLink className='NavLink' to='/Map' activestyle="true">
             Map
           </NavLink>
+          <NavLink className='NavLink' to='/Locations' activestyle="true">
+            Edit Locations
+          </NavLink>
+          <NavLink className='NavLink' onClick={() => sessionStorage.removeItem("user_name")} to='/'>
+            LogOut
+          </NavLink>
 
           {/* <NavLink to='/Sign-Out' activeStyle="true">
             Sign Out
           </NavLink> */}
           {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}  
         </NavMenu>
         {/* <NavBtn>
           <NavBtnLink to='/signin'>Sign In</NavBtnLink>

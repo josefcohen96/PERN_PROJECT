@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Container, Row, Col, Badge, Button } from "react-bootstrap";
-import './LocationPage.css';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 function LocationPage() {
   const { id } = useParams();
@@ -21,6 +21,24 @@ function LocationPage() {
     fetchLocation();
   }, [id]);
 
+  const updateLastVisit = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/locations/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ lastVisit: moment().format('YYYY-MM-DD') }),
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to patch location with id ${id}`);
+      }
+      const data = await response.json();
+      setLocation(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   if (!location) {
     return <div>Loading...</div>;
   }
@@ -28,25 +46,22 @@ function LocationPage() {
   const { name, freq, lastVisit, description, image } = location;
 
   return (
-    <Container className="py-5">
-      <Row>
-        <Col md={6}>
-          <img src={image} alt={name} className="img-fluid rounded" />
-        </Col>
-        <Col md={6}>
-          <h1 className="display-4 mb-4">{name}</h1>
-          <Badge bg="primary" className="mb-2">
-            {freq}
-          </Badge>
-          <p className="fs-5 text-muted mb-4">
-            Last visit: {new Date(lastVisit).toLocaleDateString()}
-          </p>
-          <p className="fs-4 mb-4">{description}</p>
-          <Button variant="outline-primary">Edit</Button>{" "}
-          <Button variant="danger">Delete</Button>
-        </Col>
-      </Row>
-    </Container>
+
+    <div className="location-page">
+      <div className="location-page-header">
+
+        <h1>{name}</h1>
+        <p>Frequency: {freq}</p>
+        <p>Last visit: {moment(lastVisit).format('MMMM Do, YYYY')}</p>
+      </div>
+      <div className="location-page-actions">
+        <button onClick={updateLastVisit}>Update Last Visit</button>
+        <Link to="/map">
+          <button>Go back to Map</button>
+        </Link>
+      </div>
+    </div >
+
   );
 }
 
