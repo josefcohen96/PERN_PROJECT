@@ -1,51 +1,89 @@
+import {
+  AppBar, Box, Typography
+} from '@mui/material';
 import React from 'react';
 import {
   Nav,
-  NavLink,
   NavMenu,
   //   NavBtn,
   //   NavBtnLink,
 } from './NavbarElements';
 // Import the CSS
+import Toolbar from '@mui/material/Toolbar';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <>
-      <Nav>
-        <p>Logged in as {JSON.parse(sessionStorage.getItem('user_name'))} </p>
-        <NavMenu className='NavMenu' >
-          <NavLink className='NavLink' to='/InputUser' activestyle="true">
-            Add user
-          </NavLink>
-          <NavLink className='NavLink' to='/EditUser' activestyle="true">
-            Edit User
-          </NavLink>
-          <NavLink className='NavLink' to='/DeleteUser' activestyle="true">
-            Delete User
-          </NavLink>
-          <NavLink className='NavLink' to='/Works' activestyle="true">
-            Works
-          </NavLink>
-          <NavLink className='NavLink' to='/Map' activestyle="true">
-            Map
-          </NavLink>
-          <NavLink className='NavLink' to='/Locations' activestyle="true">
-            Edit Locations
-          </NavLink>
-          <NavLink className='NavLink' onClick={() => sessionStorage.removeItem("user_name")} to='/'>
-            LogOut
-          </NavLink>
+      <AppBar variant="dense" component="nav">
+        <Toolbar className='NavMenu' >
+          <Box variant='p'>Logged in as {JSON.parse(sessionStorage.getItem('user_name'))} </Box>
+          <Typography
+            variant="h6"
+            component="div" sx={{ color: '#fff' }}>
 
-          {/* <NavLink to='/Sign-Out' activeStyle="true">
+            <Link className='Link' to='/InputUser' activestyle="true">
+              Add user
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div" sx={{ color: '#fff' }}>
+
+            <Link className='Link' to='/EditUser' activestyle="true">
+              Edit User
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div" sx={{ color: '#fff' }}>
+
+            <Link className='Link' to='/DeleteUser' activestyle="true">
+              Delete User
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div" sx={{ color: '#fff' }}>
+
+            <Link className='Link' to='/Works' activestyle="true">
+              Works
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div" sx={{ color: '#fff' }}>
+
+            <Link className='Link' to='/Map' activestyle="true">
+              Map
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div" sx={{ color: '#fff' }}>
+            <Link className='Link' to='/Locations' activestyle="true">
+              Edit Locations
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div" sx={{ color: '#fff' }}>
+
+            <Link className='Link' onClick={() => sessionStorage.removeItem("user_name")} to='/'>
+              LogOut
+            </Link>
+          </Typography>
+
+          {/* <Link to='/Sign-Out' activeStyle="true">
             Sign Out
-          </NavLink> */}
+          </Link> */}
           {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}  
-        </NavMenu>
+          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+        </Toolbar>
         {/* <NavBtn>
           <NavBtnLink to='/signin'>Sign In</NavBtnLink>
         </NavBtn> */}
-      </Nav>
+      </AppBar>
     </>
   );
 };

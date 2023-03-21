@@ -6,7 +6,6 @@
 }
 
 .form-control {
-    border: 1px solid gray;
     border-radius: 5px;
     margin-bottom: 1rem;
 }
@@ -32,25 +31,18 @@
 
 .btn {
     background-color: #007bff;
-    color: white;
     border-radius: 5px;
-    padding: 0.75rem 1.25rem;
+    border-width: 1px;
+    padding: 10px 20px;
     font-size: 1.25rem;
     cursor: pointer;
     margin-top: 1rem;
 }
 
-.btn:hover {
-    background-color: #0056b3;
-}
 
 .mx-auto {
     margin-left: auto;
     margin-right: auto;
-}
-
-.shadow {
-    box-shadow: 3px 3px 3px gray;
 }
 
 .p-5 {
