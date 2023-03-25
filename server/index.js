@@ -8,12 +8,12 @@ app.use(express.json());
 // todo : get locations from db 
 // updated app.patch function
 
-app.patch('/locations/:id', async (req, res) => {
+app.post('/locations/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { lastVisit } = req.body;
-        await pool.query("UPDATE FROM users WHERE id= $1", [id])
-
+        console.log()
+        response = await pool.query("UPDATE locations SET last_visit = CURRENT_TIMESTAMP WHERE id = $1", [id]);
+        console.log(response)
         console.log('Location updated successfully');
         res.json({ message: 'Location updated successfully' });
     }
@@ -124,19 +124,31 @@ app.post("/InputUser", async (req, res) => {
         const { phone_number } = req.body;
         const { permission } = req.body;
         const { work_area } = req.body;
-        const { speciality_product } = req.body;
+        const { id } = req.body;
+        const { product_id } = req.body;
+        const { user_name } = req.body;
+        const { is_admin } = req.body;
 
 
-        const newUser = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number,  permission, work_area, speciality_product) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *",
-            [first_name, last_name, email, phone_number, permission, work_area, speciality_product]);
+        const newUser = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number,  permission, work_area, id, product_id, is_admin, user_name) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10 ) RETURNING *",
+            [first_name, last_name, email, phone_number, permission, work_area, id, product_id, is_admin, user_name]);
         res.json(newUser.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
 });
+app.get("/Active_jobs", async (req, res) => {
+    try {
+        console.log("Active_jobs back")
+        const result = await pool.query('SELECT * FROM to_do');
+        res.json(result.rows);
+    } catch (err) {
+        return res.status(500).json({ message: 'Internal server error' });
+    }
 
+});
 app.post("/Locations", async (req, res) => {
-    try {   
+    try {
         console.log("/locations");
         console.log(req.body);
         const { id } = req.body;

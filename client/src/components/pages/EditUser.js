@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Navbar from "../NavBar/NavBar";
-
+import {
+    Box,
+    Button,
+    FormGroup,
+    Input,
+} from "@mui/material";
 const EditUser = () => {
 
     const [user, setUser] = useState({
@@ -29,22 +34,23 @@ const EditUser = () => {
         }
     };
     return (
-        <div className="container">
+        <Box >
             <Navbar />
-            <div className="row">
-                <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
+            <Box sx={{ alignItems: "center", width: "100%", pt: 12 }} className="container">
+                <Box className="col-sm-5 col-offset-3 mx-auto shadow p-5">
                     <h3 className="text-center mb-4">Enter user details</h3>
-                    <form onSubmit={e => onSubmit(e)}>
-                        <div className="form-group">
-                            <input
+                    <FormGroup>
+                        <Box className="form-group">
+                            <Input
                                 type="text"
+                                sx={{ width: "100%" }}
                                 className="form-control form-control-lg"
                                 placeholder="first name"
                                 name="first_name"
                                 value={first_name}
                                 onChange={e => onInputChange(e)}
                             />
-                            <input
+                            <Input
                                 type="text"
                                 className="form-control form-control-lg"
                                 placeholder="last name"
@@ -52,14 +58,14 @@ const EditUser = () => {
                                 value={last_name}
                                 onChange={e => onInputChange(e)}
                             />
-                        </div>
-                        <div className="form-group">
-                        </div>
-                        <button className="btn btn-secondary btn-block">Edit User</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+                        </Box>
+                        <Box className="form-group">
+                        </Box>
+                        <Button onClick={e => onSubmit(e)} className="btn btn-secondary btn-block">Edit User</Button>
+                    </FormGroup>
+                </Box>
+            </Box>
+        </Box>
     );
 };
 

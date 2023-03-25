@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useFormik } from 'formik';
 import axios from "axios"
 import Navbar from "../NavBar/NavBar";
-
+import {
+    Box,
+    Button,
+    FormGroup,
+    Input,
+} from "@mui/material";
 
 const DeleteUser = () => {
 
@@ -43,19 +48,21 @@ const DeleteUser = () => {
             var url = formik.values.id.toString()
             const response = await axios.get('http://localhost:5000/users/' + url)
             setUserData(response.data.rows[0]);
+            console.log(userData)
+
         } catch (err) {
             alert('User not found, Please verify the ID')
         }
     }
     return (
-        <div className="container">
+        <Box>
             <Navbar />
-            <div className="row">
-                <div className="col-sm-5 col-offset-3 mx-auto shadow p-5">
+            <Box sx={{ alignItems: "center", width: "100%", pt: 12 }} className="container">
+                <Box className="col-sm-5 col-offset-3 mx-auto shadow p-5">
                     <h2 className="text-center mb-4">Enter user detalis</h2>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className="form-group">
-                            <input
+                    <FormGroup onSubmit={formik.handleSubmit}>
+                        <Box className="form-group">
+                            <Input
                                 type="text"
                                 className="form-control form-control-lg"
                                 placeholder="id"
@@ -65,29 +72,31 @@ const DeleteUser = () => {
                                 value={formik.values.id}
                                 {...(formik.errors.id && { 'aria-describedby': 'id-error' })}
                             />
-                            <div className="text-danger" id="id-error">
+                            <Box className="text-danger" id="id-error">
                                 {formik.errors.id}
-                            </div>
-                        </div>
-                        <button className="btn btn-secondary btn-block" onClick={showUser} disabled={formik.isSubmitting}>Show user details</button>
-                        <button className="btn btn-secondary btn-block" disabled={formik.isSubmitting}>Delete User</button>
-                        <div>
+                            </Box>
+                        </Box>
+                        <Button className="btn btn-secondary btn-block" onClick={showUser} disabled={formik.isSubmitting}>Show user details</Button>
+                        <Button className="btn btn-secondary btn-block" disabled={formik.isSubmitting}>Delete User</Button>
+                        <Box>
                             {userData &&
-                                <div>
+                                <Box>
                                     <p>First Name: {userData.first_name}</p>
                                     <p>Last Name: {userData.last_name}</p>
                                     <p>Email: {userData.email}</p>
                                     <p>Phone Number: {userData.phone_number}</p>
                                     <p>permission: {userData.permission}</p>
                                     <p>work area: {userData.work_area}</p>
-                                    <p>speciality_product: {userData.speciality_product}</p>
-                                </div>
+                                    <p>id: {userData.id}</p>
+                                    <p>admin: {userData.is_admin ? "true" :  "false"}</p>
+                                    <p>user name: {userData.user_name}</p>
+                                </Box>
                             }
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                        </Box>
+                    </FormGroup>
+                </Box>
+            </Box>
+        </Box>
     );
 }
 export default DeleteUser;  

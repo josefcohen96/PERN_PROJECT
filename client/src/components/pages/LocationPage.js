@@ -3,6 +3,13 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import {
+  Box,
+  Button,
+} from "@mui/material";
+import Navbar from "../NavBar/NavBar";
+
+
 
 function LocationPage() {
   const { id } = useParams();
@@ -21,46 +28,45 @@ function LocationPage() {
     fetchLocation();
   }, [id]);
 
-  const updateLastVisit = async () => {
+  const updateLastVisit = async (locationId) => {
     try {
-      const response = await fetch(`http://localhost:5000/locations/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ lastVisit: moment().format('YYYY-MM-DD') }),
-      });
+      console.log(id)
+      const response = await axios.post(`http://localhost:5000/locations/${id}`, { locationId: locationId });
       if (!response.ok) {
         throw new Error(`Failed to patch location with id ${id}`);
       }
-      const data = await response.json();
+      const data = response.data
       setLocation(data);
     } catch (error) {
       console.error(error);
     }
   };
   if (!location) {
-    return <div>Loading...</div>;
+    return <Box>Loading...</Box>;
   }
 
-  const { name, freq, lastVisit, description, image } = location;
+  const { name, freq, lastVisit } = location;
+  // const { name, freq, lastVisit, description, image } = location;
 
   return (
 
-    <div className="location-page">
-      <div className="location-page-header">
+    <Box >
+      <Navbar />
+      <Box sx={{ alignItems: "center", width: "100%" }} className="container">
 
-        <h1>{name}</h1>
-        <p>Frequency: {freq}</p>
-        <p>Last visit: {moment(lastVisit).format('MMMM Do, YYYY')}</p>
-      </div>
-      <div className="location-page-actions">
-        <button onClick={updateLastVisit}>Update Last Visit</button>
-        <Link to="/map">
-          <button>Go back to Map</button>
-        </Link>
-      </div>
-    </div >
+        <Box >
+          <h1>{name}</h1>
+          <p>Frequency: {freq}</p>
+          <p>Last visit: {moment(lastVisit).format('MMMM Do, YYYY')}</p>
+        </Box>
+        <Box>
+          <Button onClick={updateLastVisit}>Update Last Visit</Button>
+          <Link to="/map">
+            <Button>Go back to Map</Button>
+          </Link>
+        </Box>
+      </Box >
+    </Box >
 
   );
 }

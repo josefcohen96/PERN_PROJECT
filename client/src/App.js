@@ -9,7 +9,11 @@ import LoginPage from "./components/pages/LoginPage";
 import WorksPage from "./components/pages/WorksPage";
 import MapPage from "./components/map/MapPage";
 import LocationPage from "./components/pages/LocationPage";
-import "./App.css"
+import ActiveJobs from "./components/pages/ShowNextJobs";
+
+import {
+  Box,
+} from "@mui/material";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,26 +23,27 @@ export default function App() {
   };
 
   return (
-    <Router>
-      {isLoggedIn && <Navbar />}
-      <Routes>
-        <Route
-          exac
-          path="/"
-          exact={true}
-          element={<LoginPage onLogin={handleLogin} />}
-        />
-        <Route path="/InputUser" element={<InputUser />} />
-        <Route path='/EditUser' element={<EditUser />} />
-        <Route path='/DeleteUser' element={<UserDetails />} />
-        <Route path='/works' element={<WorksPage />} />
-        <Route path='/Map' element={<MapPage />} />
-        <Route path="/location/:id" element={<LocationPage />} />
-        <Route path="/locations" element={<InputLocation />} />
-        {/* <Route path='/blogs' component={Blogs} /> */}
-        {/* <Route path='/blogs' component={Blogs} /> */}
-        {/* <Route path='/sign-up' component={SignUp} /> */}
-      </Routes>
-    </Router>
+    <Box sx={{}}>
+      <Router >
+        {isLoggedIn && <Navbar />}
+        <Routes>
+          <Route
+            exac
+            path="/"
+            exact={true}
+            element={<LoginPage onLogin={handleLogin} />}
+          />
+          <Route path="/InputUser" element={<InputUser />} />
+          <Route path='/EditUser' element={<EditUser />} />
+          <Route path='/DeleteUser' element={<UserDetails />} />
+          <Route path='/works' element={<WorksPage />} />
+          <Route path='/Map' element={<MapPage />} />
+          <Route path="/location/:id" element={<LocationPage />} />
+          <Route path="/locations" element={<InputLocation />} />
+          <Route path="/Active_jobs" element={<ActiveJobs />} />
+
+        </Routes>
+      </Router>
+    </Box>
   );
 }
