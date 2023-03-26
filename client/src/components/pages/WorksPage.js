@@ -58,7 +58,6 @@ function WorksList() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(work)
-
             });
             console.log(work)
             console.log(JSON.stringify(work))

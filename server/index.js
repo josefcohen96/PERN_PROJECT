@@ -8,20 +8,38 @@ app.use(express.json());
 // todo : get locations from db 
 // updated app.patch function
 
-app.post('/locations/:id', async (req, res) => {
+app.put("/locations/:id", async (req, res) => {
     try {
+        const today = new Date();
+        const dateString = today.toISOString().slice(0, 10);
         const { id } = req.params;
-        console.log()
-        response = await pool.query("UPDATE locations SET last_visit = CURRENT_TIMESTAMP WHERE id = $1", [id]);
-        console.log(response)
-        console.log('Location updated successfully');
+        const updateLastVisit = await pool.query(
+            "UPDATE locations SET lastvisit = $1 WHERE locationid = $2", [dateString, id]
+        );
+        console.log(updateLastVisit)
         res.json({ message: 'Location updated successfully' });
-    }
-    catch {
-        console.log('Location was not updated successfully');
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Location was not updated successfully' });
     }
 });
 
+//UPDATE USER
+app.put("/EditUser/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { phone_number } = req.body;
+        const updateUser = await pool.query(
+            "UPDATE users SET phone_number = $1 WHERE id = $2",
+            [phone_number, id]
+        );
+        console.log(id, phone_number)
+        res.json("Users was updated ")
+    } catch (err) {
+        console.error(err.message)
+        console.error("jet")
+    }
+})
 //ROUTES//
 
 app.get("/location/:id", async (req, res) => {

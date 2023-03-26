@@ -19,24 +19,30 @@ function LocationPage() {
     async function fetchLocation() {
       try {
         const response = await axios.get(`http://localhost:5000/location/${id}`);
+        console.log(response)
         setLocation(response.data);
       } catch (error) {
         console.error(error);
       }
     }
-
     fetchLocation();
   }, [id]);
 
-  const updateLastVisit = async (locationId) => {
+
+
+  const onSubmit = async e => {
+    e.preventDefault();
     try {
-      console.log(id)
-      const response = await axios.post(`http://localhost:5000/locations/${id}`, { locationId: locationId });
+      const response = await fetch(`http://localhost:5000/locations/${id}`, {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ locationid: id })
+      });
+      console.log(response)
       if (!response.ok) {
         throw new Error(`Failed to patch location with id ${id}`);
       }
-      const data = response.data
-      setLocation(data);
+      console.log(response.data)
     } catch (error) {
       console.error(error);
     }
@@ -52,15 +58,17 @@ function LocationPage() {
 
     <Box >
       <Navbar />
-      <Box sx={{ alignItems: "center", width: "100%" }} className="container">
+      <Box sx={{ alignItems: "center", width: "100%", pt: 12 }} className="container">
 
         <Box >
           <h1>{name}</h1>
           <p>Frequency: {freq}</p>
-          <p>Last visit: {moment(lastVisit).format('MMMM Do, YYYY')}</p>
+          <p>Last visit: {lastVisit}</p>
+          <p>location ID: {id}</p>
+          {/* <p>Last visit: {moment(lastVisit).format('MMMM Do, YYYY')}</p> */}
         </Box>
         <Box>
-          <Button onClick={updateLastVisit}>Update Last Visit</Button>
+          <Button onClick={e => onSubmit(e)}>Update Last Visit</Button>
           <Link to="/map">
             <Button>Go back to Map</Button>
           </Link>
