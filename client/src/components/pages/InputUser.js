@@ -13,9 +13,8 @@ import React, { useState } from "react";
 import Navbar from "../NavBar/NavBar";
 
 
-
 const InputUser = () => {
-  const [isAdmin, setIsAdmin] = useState({isAdmin: false});
+  const [isAdmin, setIsAdmin] = useState({ isAdmin: false });
 
   const [user, setUser] = useState({
     first_name: "jhon",
