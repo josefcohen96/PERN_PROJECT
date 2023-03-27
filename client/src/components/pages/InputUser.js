@@ -18,7 +18,7 @@ const InputUser = () => {
   const [isAdmin, setIsAdmin] = useState({isAdmin: false});
 
   const [user, setUser] = useState({
-    first_name: "yosef",
+    first_name: "jhon",
     last_name: "",
     phone_number: "",
     id: "",
@@ -28,7 +28,7 @@ const InputUser = () => {
     product_id: "",
     is_admin: "",
     user_name: "",
-    isAdmin: false,
+    is_admin: false,
   });
 
   const onInputChange = (e) => {
