@@ -28,6 +28,7 @@ const InputUser = () => {
     product_id: "",
     is_admin: "",
     user_name: "",
+    isAdmin: false,
   });
 
   const onInputChange = (e) => {
@@ -155,19 +156,21 @@ const InputUser = () => {
               onChange={(e) => onInputChange(e)}
             />
           </FormControl >
-          <FormControl sx={{ width: "100%" }}>
+          <Box>
+            <FormControl sx={{ width: "100%" }}>
 
-            <InputLabel id="demo-simple-select-label">Is admin?</InputLabel>
-            <Select
-              label="is admin?"
-              value={isAdmin}
-              onChange={(e) => onInputChange(e)}
-              key={true}
-            >
-              <MenuItem value={true}>Yes</MenuItem>
-              <MenuItem value={false}>No</MenuItem>
-            </Select>
-          </FormControl >
+              <InputLabel id="demo-simple-select-label">Is admin?</InputLabel>
+              <Select
+                label="is admin?"
+                value={isAdmin}
+                onChange={(e) => onInputChange(e)}
+                key={true}
+              >
+                <MenuItem value={true}>Yes</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl >
+          </Box>
           <Button onClick={(e) => onSubmit(e)}
             disabled={!isFormValid} sx={{}}>Create User</Button>
         </FormControl >

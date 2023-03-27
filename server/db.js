@@ -5,7 +5,7 @@ const pool = new Pool({  // config the connection
     password: "1234",
     host: "localhost",
     port: 5432,
-    database: "maintenance"
+    database: "postgres"
 });
 
 

@@ -96,7 +96,6 @@ async function validateUser(user_name, password) {
     try {
         // Query the database for a user with the given user_name
         const result = await pool.query("SELECT password FROM passwords WHERE user_name = $1", [user_name]);
-
         // If no user is found, return false
         if (result.rowCount === 0) {
             return false;
@@ -139,17 +138,19 @@ app.post("/InputUser", async (req, res) => {
         const { first_name } = req.body;
         const { last_name } = req.body;
         const { email } = req.body;
-        const { phone_number } = req.body;
         const { permission } = req.body;
+        const { phone_number } = req.body;
         const { work_area } = req.body;
         const { id } = req.body;
         const { product_id } = req.body;
         const { user_name } = req.body;
         const { is_admin } = req.body;
+        console.log(is_admin)
+        const password = 1
+        const passwordUser = await pool.query("INSERT INTO passwords(user_name, password) VALUES($1,$2) RETURNING *", [user_name, password]);
 
-
-        const newUser = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number,  permission, work_area, id, product_id, is_admin, user_name) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10 ) RETURNING *",
-            [first_name, last_name, email, phone_number, permission, work_area, id, product_id, is_admin, user_name]);
+        const newUser = await pool.query("INSERT INTO users (first_name, last_name, email, phone_number,  permission, work_area, is_admin, product_id, user_name ,id ) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10 ) RETURNING *",
+            [first_name, last_name, email, phone_number, permission, work_area, is_admin, product_id, user_name, id]);
         res.json(newUser.rows[0]);
     } catch (err) {
         console.error(err.message);
