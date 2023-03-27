@@ -15,7 +15,7 @@ import Navbar from "../NavBar/NavBar";
 
 
 const InputUser = () => {
-  const [isAdmin, setIsAdmin] = useState('');
+  const [isAdmin, setIsAdmin] = useState({isAdmin: false});
 
   const [user, setUser] = useState({
     first_name: "yosef",
@@ -56,7 +56,7 @@ const InputUser = () => {
       console.error(err.message);
     }
   };
-  const isFormValid = user.first_name && user.email && user.id && user.is_admin && user.last_name && user.permission && user.phone_number && user.product_id && user.user_name && user.work_area;
+  const isFormValid = user.first_name && user.email && user.id && user.last_name && user.permission && user.phone_number && user.product_id && user.user_name && user.work_area;
 
   return (
     <Box >
@@ -165,6 +165,7 @@ const InputUser = () => {
                 value={isAdmin}
                 onChange={(e) => onInputChange(e)}
                 key={true}
+                defaultValue={false}
               >
                 <MenuItem value={true}>Yes</MenuItem>
                 <MenuItem value={false}>No</MenuItem>
