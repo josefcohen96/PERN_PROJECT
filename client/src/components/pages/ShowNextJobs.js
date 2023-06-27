@@ -73,6 +73,30 @@ const ActiveJobs = () => {
                             </TableRow>
 
                         ))}
+                        <TableRow>
+                            <TableCell align="center" component="th" scope="row">
+                                1
+                            </TableCell>
+                            <TableCell align="center">train</TableCell>
+                            <TableCell align="center">weekly</TableCell>
+                            <TableCell align="center">206789165</TableCell>
+                            <TableCell align="center">Eyal netanyau</TableCell>
+                            <TableCell align="center">12</TableCell>
+                            <TableCell align="center">HIT</TableCell>
+                            <TableCell align="center">40.7128° N, 74.0060° W</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell align="center" component="th" scope="row">
+                                2
+                            </TableCell>
+                            <TableCell align="center">elivators</TableCell>
+                            <TableCell align="center">yearly</TableCell>
+                            <TableCell align="center">315346541</TableCell>
+                            <TableCell align="center">Yakov cohen</TableCell>
+                            <TableCell align="center">13</TableCell>
+                            <TableCell align="center">MIT</TableCell>
+                            <TableCell align="center">34.0522° N, 118.2437° W</TableCell>
+                        </TableRow>
 
                     </TableBody>
                 </Table>

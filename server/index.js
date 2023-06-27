@@ -187,7 +187,7 @@ app.post('/works', async (req, res) => {
         const { task_name } = req.body;
         const { task_id } = req.body;
         const { frequency } = req.body;
-
+        console.log("arrived works")
         const newWork = await pool.query("INSERT INTO works (task_name, task_id,  frequency) VALUES($1,$2,$3) RETURNING *",
             [task_name, task_id, frequency]);
         res.json(newWork.rows[0]);

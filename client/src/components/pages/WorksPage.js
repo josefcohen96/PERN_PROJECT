@@ -30,7 +30,6 @@ function WorksList() {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });
-            console.log(response)
             const jsonData = await response.json();
             setWorkouts(jsonData);
         }
@@ -44,26 +43,30 @@ function WorksList() {
         task_name: "",
         task_id: "",
         product_id: "",
-        frequency: ""
+        frequency: "",
+        product_id: "",
+        product_name: ""
     });
-    const { task_name, task_id, frequency } = work
+    const { task_name, task_id, frequency, product_id, product_name } = work
     const onInputChange = e => {
         e.preventDefault();
         setWork({ ...work, [e.target.name]: e.target.value });
     }
+
+
     const onSubmit = async e => {
         e.preventDefault();
+        console.log("hey");
         try {
-            const response = await fetch("http://localhost:5000/Works", {
+            const response = await fetch("http://localhost:5000/works", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(work)
             });
-            console.log(work)
-            console.log(JSON.stringify(work))
-            console.log(response)
+            console.log(response);
+            console.log(await response.json()); // Log the response body if applicable
         } catch (err) {
-            console.error(err.message)
+            console.error(err.message);
         }
     };
 
@@ -99,6 +102,25 @@ function WorksList() {
                         />
                     </Box>
                     <Box className>
+                        <Input
+                            type="text"
+                            className="form-control form-control-lg"
+                            placeholder="Enter porduct id"
+                            name="product_id"
+                            value={product_id}
+                            onChange={e => onInputChange(e)}
+                        />
+                    </Box>                    <Box className>
+                        <Input
+                            type="text"
+                            className="form-control form-control-lg"
+                            placeholder="Enter product name"
+                            name="product_name"
+                            value={product_name}
+                            onChange={e => onInputChange(e)}
+                        />
+                    </Box>
+                    <Box className>
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic" name="frequency" value={frequency} onChange={e => onInputChange(e)}
                             >
@@ -114,7 +136,7 @@ function WorksList() {
 
                         </Dropdown>
                     </Box>
-                    <Button onSubmit={e => onSubmit(e)} >Create Work</Button>
+                    <Button onSubmit={onSubmit()} >Create Work</Button>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
@@ -138,6 +160,7 @@ function WorksList() {
                                         <TableCell align="center">{work.task_name}</TableCell>
                                         <TableCell align="center">{work.frequency}</TableCell>
                                         <TableCell align="center">{work.product_id}</TableCell>
+                                        <TableCell align="center">{work.product_name}</TableCell>
                                     </TableRow>
 
                                 ))}

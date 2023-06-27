@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Navbar from "../NavBar/NavBar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+    Box,
 
+} from "@mui/material";
 const InputLocation = () => {
 
     const [location, setLocation] = useState({
@@ -11,7 +14,7 @@ const InputLocation = () => {
         coordinates: "",
         lastVisit: new Date()
     });
-    
+
     const onInputChange = e => {
         e.preventDefault();
 
@@ -25,7 +28,7 @@ const InputLocation = () => {
 
     const onSubmit = async e => {
         e.preventDefault();
-    
+
         try {
             const { id, name, coordinates, lastVisit } = location;
             const formattedDate = new Date(lastVisit).toISOString().split("T")[0];
@@ -46,7 +49,7 @@ const InputLocation = () => {
         }
     };
     return (
-        <div className="container">
+        <Box >
             <Navbar />
 
             <div className="row">
@@ -100,7 +103,7 @@ const InputLocation = () => {
                     </form>
                 </div>
             </div >
-        </div >
+        </Box>
     );
 };
 
