@@ -23,7 +23,7 @@ export default function App() {
   };
 
   return (
-    <Box sx={{}}>
+    <Box >
       <Router >
         {isLoggedIn && <Navbar />}
         <Routes>

@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
 import './LoginPage.css'; // Import the CSS
+import { api } from '../../NewApi';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage({ onLogin }) {
+  const navigate = useNavigate();
+  console.log(navigate);
   const [user_name, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [companyId, setCompanyId] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log("hello")
     try {
-      console.log("hello2")
-      const response = await fetch("http://localhost:5000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_name, password }),
-      });
-      console.log(response)
-      if (!response.ok) {
-        alert("Incorrect user name or password. Please try again");
-        return;
-      }
-      onLogin();
-      sessionStorage.setItem('user_name', JSON.stringify(user_name));
-      window.location.href = '/works';
+      const requestBody = {
+        user_name: user_name.trim(),
+        password: password.trim(),
+        company_id: parseInt(companyId.trim()),
+      };
+      api('users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      }).then((res) => {
+        console.log(res);
+
+        if (res.ok) {
+          onLogin();
+          localStorage.setItem('token', res.answer.token);
+          localStorage.setItem('role', res.answer.role);
+          navigate('/works');
+        } else {
+          alert(res.answer + ". Please try again");
+        }
+      })
 
     } catch (err) {
       console.error(err.message)
@@ -49,6 +62,16 @@ function LoginPage({ onLogin }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Company ID:
+          <input
+            className="login-input"
+            type="text"
+            value={companyId}
+            onChange={(e) => setCompanyId(e.target.value)}
           />
         </label>
         <br />

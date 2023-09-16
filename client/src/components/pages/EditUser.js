@@ -6,14 +6,31 @@ import {
     FormGroup,
     Input,
 } from "@mui/material";
+import { api } from "../../NewApi";
 const EditUser = () => {
+    const token = localStorage.getItem('token');
 
     const [user, setUser] = useState({
         first_name: "",
         last_name: "",
+        user_id: '',
+        user_name: '',
+        email: '',
+        password: '',
+        phone: '',
+        address: '',
+        area: '',
+        role: '',
+        company_id: '',
     });
 
-    const { first_name, last_name } = user;
+    const { first_name, last_name, user_id, user_name, email,
+        password,
+        phone,
+        address,
+        area,
+        role,
+        company_id, } = user;
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -21,13 +38,18 @@ const EditUser = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/EditUser", {
-                method: "put",
-                body: JSON.stringify(user)
-            });
+            api('users/updateUser', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    ...user,
+                })
+            })
+
             console.log(user)
-            console.log(JSON.stringify(user))
-            console.log(response)
         } catch (err) {
             console.error(err.message)
         }
@@ -40,6 +62,22 @@ const EditUser = () => {
                     <h3 className="text-center mb-4">Enter user details</h3>
                     <FormGroup>
                         <Box className="form-group">
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="user id"
+                                name="user_id"
+                                value={user_id}
+                                onChange={e => onInputChange(e)}
+                            />
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="user name"
+                                name="user_name"
+                                value={user_name}
+                                onChange={e => onInputChange(e)}
+                            />
                             <Input
                                 type="text"
                                 sx={{ width: "100%" }}
@@ -55,6 +93,68 @@ const EditUser = () => {
                                 placeholder="last name"
                                 name="last_name"
                                 value={last_name}
+                                onChange={e => onInputChange(e)}
+                            />
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Email"
+                                name="email"
+                                value={email}
+                                onChange={e => onInputChange(e)}
+                            />
+
+                            <Input
+                                type="password"
+                                className="form-control form-control-lg"
+                                placeholder="Password"
+                                name="password"
+                                value={password}
+                                onChange={e => onInputChange(e)}
+                            />
+
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Phone"
+                                name="phone"
+                                value={phone}
+                                onChange={e => onInputChange(e)}
+                            />
+
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Address"
+                                name="address"
+                                value={address}
+                                onChange={e => onInputChange(e)}
+                            />
+
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Area"
+                                name="area"
+                                value={area}
+                                onChange={e => onInputChange(e)}
+                            />
+
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Role"
+                                name="role"
+                                value={role}
+                                onChange={e => onInputChange(e)}
+                            />
+
+                            <Input
+                                type="text"
+                                className="form-control form-control-lg"
+                                placeholder="Company ID"
+                                name="company_id"
+                                value={company_id}
                                 onChange={e => onInputChange(e)}
                             />
                         </Box>
