@@ -35,7 +35,7 @@ export default function App() {
           />
           <Route path="/InputUser" element={<InputUser />} />
           <Route path='/EditUser' element={<EditUser />} />
-          <Route path='/DeleteUser' element={<UserDetails />} />
+//          <Route path='/DeleteUser' element={<UserDetails />} />
           <Route path='/works' element={<WorksPage />} />
           <Route path='/Map' element={<MapPage />} />
           <Route path="/location/:id" element={<LocationPage />} />

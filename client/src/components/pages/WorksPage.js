@@ -68,12 +68,11 @@ function WorksList() {
     };
 
     return (
-        <Box >
-            <Navbar />
+        <Box>Ï
             <Box sx={{ alignItems: "center", width: "100%", pt: 5 }} className="container">
                 <FormControl
                     sx={{ gap: 2, width: "80%", pb: 4, pl: 25 }}
-                >
+              Ï  >
                     <Typography sx={{ textAlign: "center" }} variant="h3">
                         Add Work
                     </Typography>
