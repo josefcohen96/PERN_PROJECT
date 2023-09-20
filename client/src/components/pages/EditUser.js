@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../NavBar/NavBar";
 import {
     Box,
@@ -9,11 +9,11 @@ import {
 import { api } from "../../NewApi";
 const EditUser = () => {
     const token = localStorage.getItem('token');
-
+    const [users, setUsers] = useState([]);
+    const user_id = 20
     const [user, setUser] = useState({
         first_name: "",
         last_name: "",
-        user_id: '',
         user_name: '',
         email: '',
         password: '',
@@ -24,7 +24,7 @@ const EditUser = () => {
         company_id: '',
     });
 
-    const { first_name, last_name, user_id, user_name, email,
+    const { first_name, last_name, user_name, email,
         password,
         phone,
         address,
@@ -35,6 +35,60 @@ const EditUser = () => {
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
     }
+    const onChange = key => value => {
+        setUser({ ...user, [key]: value });
+    }
+
+
+    async function getUsers() {
+        try {
+            const response = await fetch(
+                'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            const data = await response.json();
+            return data.answer;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    }
+
+    useEffect(() => {
+        getUsers()
+            .then((data) => {
+                setUsers(data);
+                console.log(data);
+            })
+            .catch((err) => console.error(err));
+    }, []);
+
+    useEffect(() => {
+        if (users.length) {
+            const editedUser = users.find(
+                (user) => user.user_id === parseInt(user_id)
+            );
+            console.log(editedUser);
+            onChange('user_name')(editedUser.user_name);
+            onChange('password')(editedUser.password);
+            onChange('company_id')(editedUser.company_id);
+            onChange('first_name')(editedUser.first_name);
+            onChange('last_name')(editedUser.last_name);
+            onChange('email')(editedUser.email);
+            onChange('phone')(editedUser.phone);
+            onChange('role')(editedUser.role);
+            onChange('address_name')(editedUser.address_name);
+            onChange('zone_name')(editedUser.zone_name);
+        }
+    }, [users]);
     const onSubmit = async e => {
         e.preventDefault();
         try {
@@ -62,14 +116,6 @@ const EditUser = () => {
                     <h3 className="text-center mb-4">Enter user details</h3>
                     <FormGroup>
                         <Box className="form-group">
-                            <Input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="user id"
-                                name="user_id"
-                                value={user_id}
-                                onChange={e => onInputChange(e)}
-                            />
                             <Input
                                 type="text"
                                 className="form-control form-control-lg"

@@ -1,61 +1,87 @@
 import {
   Box,
   Button,
-  FormControl,
   Typography,
-  InputLabel,
-  Select,
-  MenuItem,
-  TextField,
+  Input,
 } from "@mui/material";
 
 import React, { useState } from "react";
 import Navbar from "../NavBar/NavBar";
+import { useNavigate } from 'react-router-dom';
 
 
-const InputUser = () =>  {
-  const [isAdmin, setIsAdmin] = useState({ isAdmin: false });
+const InputUser = () => {
+  const navigate = useNavigate();
 
-  const [user, setUser] = useState({
-    first_name: "jhon",
-    last_name: "",
-    phone_number: "",
-    id: "",
-    email: "example@gmail.com",
-    permission: "",
-    work_area: "",
-    product_id: "",
-    is_admin: "",
-    user_name: "",
-    is_admin: false,
-  });
+  const [user, setUser] = useState(
+    {
+      first_name: "",
+      last_name: "",
+      user_name: '',
+      email: '',
+      password: '',
+      phone: '',
+      address: '',
+      area: '',
+      role: '',
+      company_id: '',
+    });
 
   const onInputChange = (e) => {
     e.preventDefault();
-    setIsAdmin(e.target.value);
-    user.is_admin = e.target.value
-
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
+  const token = localStorage.getItem('token');
+
+  async function addUserFetch() {
+    try {
+      const response = await fetch(
+        'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/addUser',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            ...user,
+            location: {
+              address_name: address,
+              zone_name: area,
+              city: 'Holon',
+              country: 'Israel',
+              latitude: 34.052235,
+              longitude: -118.243683,
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      console.log(response);
+      navigate('/admin');
+      return true;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+  const { first_name, last_name, user_name, email,
+    password,
+    phone,
+    address,
+    area,
+    role,
+    company_id, } = user;
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch("http://localhost:5000/InputUser", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
-      console.log(user);
-      console.log(JSON.stringify(user));
-      console.log(response);
-    } catch (err) {
-      console.error(err.message);
-    }
+    addUserFetch()
   };
-  const isFormValid = user.first_name && user.email && user.id && user.last_name && user.permission && user.phone_number && user.product_id && user.user_name && user.work_area;
 
   return (
     <Box >
@@ -65,115 +91,94 @@ const InputUser = () =>  {
         <Typography sx={{ textAlign: "center" }} variant="h3">
           Add User
         </Typography>
-        <FormControl
-          sx={{ gap: 2, width: "80%", pb: 4, pl: 25 }}
-        >
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
-              type="text"
-              sx={{ width: "100%" }}
-              placeholder="Enter first name"
-              name="first_name"
-              value={user.first_name}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <FormControl sx={{ width: '100%' }}>
-            <TextField
-              type="text"
-              placeholder="Enter last name"
-              name="last_name"
-              value={user.last_name}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="user name"
+          name="user_name"
+          value={user_name}
+          onChange={e => onInputChange(e)}
+        />
+        <Input
+          type="text"
+          sx={{ width: "100%" }}
+          className="form-control form-control-lg"
+          placeholder="first name"
+          name="first_name"
+          value={first_name}
+          onChange={e => onInputChange(e)}
+        />
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="last name"
+          name="last_name"
+          value={last_name}
+          onChange={e => onInputChange(e)}
+        />
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Email"
+          name="email"
+          value={email}
+          onChange={e => onInputChange(e)}
+        />
 
-              type="text"
-              placeholder="Enter E-mail"
-              name="email"
-              value={user.email}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
+        <Input
+          type="password"
+          className="form-control form-control-lg"
+          placeholder="Password"
+          name="password"
+          value={password}
+          onChange={e => onInputChange(e)}
+        />
 
-              type="text"
-              placeholder="Enter phone number"
-              name="phone_number"
-              value={user.phone_number}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
-              type="text"
-              placeholder="Enter permission"
-              name="permission"
-              value={user.permission}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
-              type="text"
-              placeholder="Enter work_area"
-              name="work_area"
-              value={user.work_area}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
-              required
-              type="text"
-              placeholder="Enter id"
-              name="id"
-              value={user.id}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Phone"
+          name="phone"
+          value={phone}
+          onChange={e => onInputChange(e)}
+        />
 
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
-              type="text"
-              placeholder="Enter product id"
-              name="product_id"
-              value={user.product_id}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <FormControl sx={{ width: "100%" }}>
-            <TextField
-              type="text"
-              helperText="user name"
-              placeholder="Enter user name"
-              name="user_name"
-              value={user.user_name}
-              onChange={(e) => onInputChange(e)}
-            />
-          </FormControl >
-          <Box>
-            <FormControl sx={{ width: "100%" }}>
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Address"
+          name="address"
+          value={address}
+          onChange={e => onInputChange(e)}
+        />
 
-              <InputLabel id="demo-simple-select-label">Is admin?</InputLabel>
-              <Select
-                label="is admin?"
-                value={isAdmin}
-                onChange={(e) => onInputChange(e)}
-                key={true}
-                defaultValue={false}
-              >
-                <MenuItem value={true}>Yes</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl >
-          </Box>
-          <Button onClick={(e) => onSubmit(e)}
-            disabled={!isFormValid} sx={{}}>Create User</Button>
-        </FormControl >
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Area"
+          name="area"
+          value={area}
+          onChange={e => onInputChange(e)}
+        />
+
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Role"
+          name="role"
+          value={role}
+          onChange={e => onInputChange(e)}
+        />
+
+        <Input
+          type="text"
+          className="form-control form-control-lg"
+          placeholder="Company ID"
+          name="company_id"
+          value={company_id}
+          onChange={e => onInputChange(e)}
+        />
+        <Button onClick={(e) => onSubmit(e)}>Create User</Button>
       </Box>
     </Box >
   );
